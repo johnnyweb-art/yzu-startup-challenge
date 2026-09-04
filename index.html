@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="元智大學第一屆「元創盃」創新創業競賽入口頁。請選擇中文或 English 進入報名頁。The 1st YZU Startup Challenge entry page.">
+<meta name="robots" content="index, follow">
+<title>元創盃 YZU Startup Challenge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+
+<style>
+/* ============================================================
+   元創盃 語言選擇入口頁
+   本頁刻意固定為深底品牌樣貌（對應海報主視覺深底版），不隨系統淺色深色切換。
+   所有顏色皆明確指定，於任何底色環境下都成立。
+   ★ 本頁不需填任何網址；報名表單網址請在 register-zh.html 與 register-en.html 內填寫。
+   ============================================================ */
+
+:root{
+  --deep:#0E2A47; --deep-2:#16344F; --deep-3:#1B3B5F;
+  --ink:#FFFFFF; --mid:#BACBDD; --soft:#8FA6BC;
+  --gold:#C9A227; --gold-lit:#DDB43C;
+  --line:rgba(255,255,255,.18);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; min-height:100vh; background:var(--deep); color:var(--ink);
+  font-family:"Noto Sans TC","Barlow",system-ui,"Microsoft JhengHei",sans-serif;
+  font-size:16px; line-height:1.7; font-feature-settings:"palt" 1;
+  display:flex; flex-direction:column;
+}
+h1,h2,h3{margin:0; line-height:1.2; text-wrap:balance; font-weight:700}
+p{margin:0}
+a{color:inherit; text-decoration:none}
+:focus-visible{outline:2px solid var(--gold); outline-offset:4px; border-radius:3px}
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important}}
+
+#trails{position:fixed; inset:0; width:100%; height:100%; opacity:.45; pointer-events:none}
+.page{position:relative; flex:1; display:flex; flex-direction:column;
+  width:min(100% - 2.5rem, 62rem); margin-inline:auto; padding:2.2rem 0 2.6rem}
+
+/* 頁首 */
+.mark{display:flex; align-items:baseline; gap:.7rem; flex-wrap:wrap; padding-bottom:1.1rem; border-bottom:1.5px solid var(--gold)}
+.mark b{font-size:1.05rem; letter-spacing:.06em}
+.mark span{font-family:"Barlow",sans-serif; font-size:.72rem; letter-spacing:.2em; color:var(--mid); text-transform:uppercase}
+
+/* 標題區 */
+.title{padding:3rem 0 2.4rem}
+.title .eyebrow{font-family:"Barlow",sans-serif; font-size:.72rem; letter-spacing:.24em; color:var(--gold); text-transform:uppercase}
+.title h1{font-size:clamp(2rem,5.4vw,3.2rem); font-weight:900; margin-top:.9rem; letter-spacing:-.005em}
+.title h1 em{font-style:normal; color:var(--gold)}
+.title .en{font-family:"Barlow Condensed",sans-serif; font-weight:600; font-size:clamp(1.1rem,3vw,1.6rem);
+  letter-spacing:.04em; color:var(--mid); margin-top:.5rem}
+.title .ask{margin-top:1.8rem; font-size:1rem; color:var(--mid)}
+.title .ask b{color:var(--ink); font-weight:500}
+
+/* 語言卡 */
+.cards{display:grid; gap:1.1rem; grid-template-columns:repeat(auto-fit,minmax(19rem,1fr))}
+.card{
+  position:relative; background:var(--deep-2); border:1px solid var(--line);
+  border-radius:3px; padding:1.7rem 1.6rem 1.5rem; display:flex; flex-direction:column;
+  transition:border-color .15s ease, background .15s ease, transform .15s ease;
+}
+.card:hover{border-color:var(--gold); background:var(--deep-3); transform:translateY(-2px)}
+.card .lang{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:2.1rem; letter-spacing:.02em; color:var(--gold); line-height:1}
+.card .lang.zh{font-family:"Noto Sans TC",sans-serif; font-size:1.8rem; font-weight:900}
+.card .name{margin-top:.7rem; font-size:.95rem; color:var(--mid); min-height:3rem}
+.card .links{margin-top:1.3rem; display:grid; gap:.55rem}
+.go{
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  padding:.8rem 1rem; border-radius:2px; font-size:.95rem; font-weight:700;
+  background:var(--gold); color:#22190A; transition:background .12s ease;
+}
+.go:hover{background:var(--gold-lit)}
+.go .arw{font-family:"Barlow Condensed",sans-serif; font-weight:700}
+.suggest{
+  position:absolute; top:-.6rem; right:1.2rem; background:var(--gold); color:#22190A;
+  font-size:.65rem; font-weight:700; letter-spacing:.1em; padding:.15rem .55rem; border-radius:2px;
+}
+.suggest[hidden]{display:none}
+
+/* 資訊條 */
+.facts{margin-top:2.4rem; padding-top:1.4rem; border-top:1px solid var(--line);
+  display:grid; gap:1rem 2rem; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
+.facts div .k{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.5rem; letter-spacing:.01em; font-variant-numeric:tabular-nums}
+.facts div .l{font-size:.76rem; color:var(--soft); margin-top:.1rem; line-height:1.55}
+
+footer{position:relative; padding-top:1.6rem; margin-top:auto; font-size:.76rem; color:var(--soft); line-height:1.75}
+footer b{color:var(--mid); font-weight:500}
+</style>
+</head>
+<body>
+<canvas id="trails" aria-hidden="true"></canvas>
+
+<div class="page">
+  <div class="mark">
+    <b>元創盃</b>
+    <span>YZU Startup Challenge 2026</span>
+  </div>
+
+  <div class="title">
+    <p class="eyebrow">Yuan Ze University · 115-1</p>
+    <h1>從一個想法，到一支<em>國家隊</em></h1>
+    <p class="en">From one idea to a national contender</p>
+    <p class="ask"><b>請選擇語言</b>　　<b>Please choose your language</b></p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <span class="suggest" id="sugZh" hidden>建議</span>
+      <p class="lang zh">中文</p>
+      <p class="name">元智大學第一屆「元創盃」創新創業競賽<br>（名稱以核定公告為準）</p>
+      <div class="links">
+        <a class="go" href="register-zh.html">我要報名參賽 <span class="arw">&rarr;</span></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="suggest" id="sugEn" hidden>SUGGESTED</span>
+      <p class="lang">English</p>
+      <p class="name">The 1st YZU Startup Challenge<br>(name subject to official approval)</p>
+      <div class="links">
+        <a class="go" href="register-en.html">Register for the competition <span class="arw">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div>
+      <p class="k">14 Sep &ndash; 16 Oct</p>
+      <p class="l">報名期間．9/14（一）至 10/16（五）17:00<br>Registration period, closes 16 Oct 17:00</p>
+    </div>
+    <div>
+      <p class="k">NT$20,000</p>
+      <p class="l">單隊最高獎金．11 座獎項<br>Single-team maximum. 11 awards in total</p>
+    </div>
+    <div>
+      <p class="k">3 &ndash; 6</p>
+      <p class="l">每隊人數．可跨系跨院跨年級<br>Team size. Cross-department teams welcome</p>
+    </div>
+    <div>
+      <p class="k">Paperless</p>
+      <p class="l">全程線上，零紙本，免報名費<br>Fully online. No printing. Free entry</p>
+    </div>
+  </div>
+
+  <footer>
+    <p><b>主辦 Organiser：</b>元智大學創新創業中心　Center for Innovation and Entrepreneurship, Yuan Ze University</p>
+    <p><b>指導 Supervising unit：</b>元智大學研究發展處　Office of Research and Development, Yuan Ze University</p>
+    <p>競賽名稱以核定公告為準，時程與獎額為暫定，一律以本中心正式公告為準。中英文版本如有歧異，以中文版本為準。<br>
+    Name subject to official approval. Dates and prize amounts are provisional and subject to official announcement. The Chinese version prevails in the event of any discrepancy.</p>
+  </footer>
+</div>
+
+<script>
+/* 依瀏覽器語言標示建議選項，不自動跳轉，選擇權仍在使用者 */
+(function suggest(){
+  try{
+    const langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""]);
+    const isZh = langs.some(function(l){ return /^zh/i.test(l); });
+    document.getElementById(isZh ? "sugZh" : "sugEn").hidden = false;
+  }catch(e){}
+})();
+
+/* 上升光軌，與海報主視覺同一語言 */
+(function trails(){
+  const c = document.getElementById("trails");
+  if(!c) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ctx = c.getContext("2d");
+  let w = 0, h = 0, lines = [], raf = 0;
+
+  function seed(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = c.clientWidth; h = c.clientHeight;
+    if(w < 2 || h < 2) return false;
+    c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    lines = [];
+    const n = w < 640 ? 8 : 15;
+    for(let i = 0; i < n; i++){
+      lines.push({
+        x: Math.random() * w * 1.5 - w * 0.35,
+        y: -h * 0.25 + Math.random() * h * 1.5,
+        len: 100 + Math.random() * 300,
+        v: 0.1 + Math.random() * 0.4,
+        a: 0.05 + Math.random() * 0.24,
+        gold: Math.random() < 0.45
+      });
+    }
+    return true;
+  }
+
+  function draw(){
+    if(w < 2 || h < 2) return;
+    ctx.clearRect(0, 0, w, h);
+    const k = 0.62;
+    for(const L of lines){
+      const g = ctx.createLinearGradient(L.x, L.y, L.x + L.len * k, L.y - L.len);
+      const col = L.gold ? "201,162,39" : "255,255,255";
+      g.addColorStop(0, "rgba(" + col + ",0)");
+      g.addColorStop(0.55, "rgba(" + col + "," + L.a + ")");
+      g.addColorStop(1, "rgba(" + col + ",0)");
+      ctx.strokeStyle = g;
+      ctx.lineWidth = L.gold ? 1.4 : 0.8;
+      ctx.beginPath();
+      ctx.moveTo(L.x, L.y);
+      ctx.lineTo(L.x + L.len * k, L.y - L.len);
+      ctx.stroke();
+      if(!reduce){
+        L.y -= L.v; L.x += L.v * k;
+        if(L.y + L.len < -20){ L.y = h + 40 + Math.random() * 120; L.x = Math.random() * w * 1.5 - w * 0.35; }
+      }
+    }
+    if(!reduce) raf = requestAnimationFrame(draw);
+  }
+
+  function start(){ cancelAnimationFrame(raf); if(seed()) draw(); }
+
+  let tries = 0;
+  function tryStart(){
+    start();
+    if((w < 2 || h < 2) && tries < 20){ tries++; setTimeout(tryStart, 150); }
+  }
+  tryStart();
+
+  if(window.ResizeObserver){
+    let t0;
+    new ResizeObserver(function(){ clearTimeout(t0); t0 = setTimeout(start, 120); }).observe(document.body);
+  } else {
+    let t; window.addEventListener("resize", function(){ clearTimeout(t); t = setTimeout(start, 200); });
+  }
+  window.addEventListener("load", start);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(start); }
+})();
+</script>
+
+</body>
+</html>

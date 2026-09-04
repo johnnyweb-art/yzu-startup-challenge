@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Registration page for the 1st YZU Startup Challenge. Fully paperless. Track selector, document checklist, awards, schedule and FAQ. Registration runs 14 Sep to 16 Oct 2026.">
+<meta name="robots" content="index, follow">
+<title>YZU Startup Challenge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+
+<style>
+/* ============================================================
+   YZU Startup Challenge registration page (English version)
+   Brand source: 12 Key Visual and Poster Design Spec
+   (deep navy #0E2A47 + gold #C9A227)
+   TODO for the Center: replace FORM_URL in the <script> below
+   with the Google registration form URL
+   ============================================================ */
+
+:root{
+  --ground:#F5F1E6; --surface:#FFFFFF; --surface-2:#EFEADB;
+  --ink:#0E2A47; --ink-mid:#4A5D75; --ink-soft:#71829A;
+  --line:#DCD5C4; --line-firm:#B9B099;
+  --accent:#0E2A47; --accent-ink:#FFFFFF;
+  --gold:#8A6A12; --gold-rule:#C9A227; --gold-wash:#F3E9C7;
+  --ok:#2E7D5B; --ok-wash:#E2F0E9;
+  --warn:#8A6400; --warn-wash:#F7EBCC;
+  --shadow:0 1px 0 rgba(14,42,71,.06), 0 8px 28px -18px rgba(14,42,71,.45);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B2038; --surface:#12304C; --surface-2:#1B3B5F;
+    --ink:#EAF1F8; --ink-mid:#AFC2D6; --ink-soft:#8397AC;
+    --line:#23486D; --line-firm:#37628C;
+    --accent:#C9A227; --accent-ink:#0B2038;
+    --gold:#D9B43F; --gold-rule:#C9A227; --gold-wash:#2A3C46;
+    --ok:#6FC79C; --ok-wash:#173D31;
+    --warn:#E0A200; --warn-wash:#3A3018;
+    --shadow:0 1px 0 rgba(0,0,0,.25), 0 12px 32px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B2038; --surface:#12304C; --surface-2:#1B3B5F;
+  --ink:#EAF1F8; --ink-mid:#AFC2D6; --ink-soft:#8397AC;
+  --line:#23486D; --line-firm:#37628C;
+  --accent:#C9A227; --accent-ink:#0B2038;
+  --gold:#D9B43F; --gold-rule:#C9A227; --gold-wash:#2A3C46;
+  --ok:#6FC79C; --ok-wash:#173D31;
+  --warn:#E0A200; --warn-wash:#3A3018;
+  --shadow:0 1px 0 rgba(0,0,0,.25), 0 12px 32px -20px rgba(0,0,0,.8);
+}
+
+/* Dark band: fixed regardless of theme, matches the dark poster key visual */
+:root{
+  --deep:#0E2A47; --deep-2:#1B3B5F; --deep-ink:#FFFFFF;
+  --deep-mid:#BACBDD; --deep-gold:#C9A227;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Noto Sans TC","Barlow",system-ui,"Microsoft JhengHei",sans-serif;
+  font-size:16px; line-height:1.75; letter-spacing:.01em;
+  font-feature-settings:"palt" 1;
+}
+h1,h2,h3,h4{text-wrap:balance; line-height:1.25; margin:0; font-weight:700}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold-rule); outline-offset:3px; border-radius:2px}
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important}}
+
+.wrap{width:min(100% - 2.5rem, 68rem); margin-inline:auto}
+.measure{max-width:44rem}
+.num{font-family:"Barlow Condensed","Barlow",sans-serif; font-variant-numeric:tabular-nums; font-weight:700; letter-spacing:.01em}
+.eyebrow{
+  font-family:"Barlow","Noto Sans TC",sans-serif; font-weight:600;
+  font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
+}
+
+/* ---------- Setup notice (disappears once the form URL is filled in) ---------- */
+#setupNote{
+  display:none; background:var(--warn-wash); color:var(--warn);
+  border-bottom:1px solid var(--gold-rule); padding:.7rem 0; font-size:.85rem;
+}
+#setupNote.on{display:block}
+#setupNote .wrap{display:flex; gap:.6rem; align-items:baseline; flex-wrap:wrap}
+#setupNote strong{font-weight:700}
+
+/* ---------- Header ---------- */
+.topbar{
+  background:var(--deep); color:var(--deep-ink);
+  border-bottom:1.5px solid var(--deep-gold);
+}
+.topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 0}
+.brandmark{display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap}
+.brandmark b{font-size:1.02rem; letter-spacing:.05em}
+.brandmark span{font-size:.72rem; color:var(--deep-mid); letter-spacing:.16em}
+.topbar nav{display:flex; gap:1.1rem; font-size:.82rem; color:var(--deep-mid)}
+.topbar nav a{text-decoration:none; padding-bottom:2px; border-bottom:1px solid transparent}
+.topbar nav a:hover{color:var(--deep-ink); border-bottom-color:var(--deep-gold)}
+@media (max-width:720px){ .topbar nav{display:none} }
+
+/* ---------- Hero ---------- */
+.hero{position:relative; background:var(--deep); color:var(--deep-ink); overflow:hidden}
+.hero canvas{position:absolute; inset:0; width:100%; height:100%; opacity:.5}
+.hero .wrap{position:relative; padding:4.2rem 0 3.2rem}
+.hero .eyebrow{color:var(--deep-gold)}
+.hero h1{
+  font-size:clamp(2.5rem,7.5vw,4.6rem); font-weight:900; letter-spacing:-.01em;
+  margin:.9rem 0 0; line-height:1.14;
+}
+.hero h1 em{font-style:normal; color:var(--deep-gold)}
+.hero .fullname{margin-top:1.1rem; font-size:clamp(1rem,2.4vw,1.3rem); font-weight:700}
+.hero .fullname small{display:block; font-weight:400; font-size:.78rem; color:var(--deep-mid); margin-top:.3rem}
+.hero .sub{margin-top:.9rem; color:var(--deep-mid); max-width:34rem}
+
+.status{
+  display:inline-flex; align-items:center; gap:.55rem; margin-top:1.6rem;
+  border:1px solid var(--deep-gold); border-radius:999px;
+  padding:.42rem .95rem; font-size:.86rem; font-weight:500;
+  background:rgba(201,162,39,.1);
+}
+.status .dot{width:.5rem; height:.5rem; border-radius:50%; background:var(--deep-gold); flex:none}
+.status .dot.live{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.status b{font-family:"Barlow Condensed",sans-serif; font-size:1.15rem; font-variant-numeric:tabular-nums}
+
+.facts{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:2.4rem; border-top:1px solid rgba(255,255,255,.18);
+}
+.facts div{padding:1.1rem 1.2rem 0 0}
+.facts div + div{border-left:1px solid rgba(255,255,255,.18); padding-left:1.2rem}
+.facts .k{font-size:clamp(1.7rem,5vw,2.7rem); color:var(--deep-ink)}
+.facts .k i{font-style:normal; font-size:.5em; color:var(--deep-mid); margin-left:.2em}
+.facts .l{font-size:.74rem; color:var(--deep-mid); letter-spacing:.06em; margin-top:.15rem}
+
+.cta-row{display:flex; gap:.75rem; flex-wrap:wrap; margin-top:2.2rem; align-items:center}
+.btn{
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-family:inherit; font-size:.95rem; font-weight:700; text-decoration:none;
+  padding:.85rem 1.5rem; border-radius:2px; border:1.5px solid transparent; cursor:pointer;
+  transition:transform .12s ease, background .12s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--deep-gold); color:#22190A; border-color:var(--deep-gold)}
+.btn-primary:hover{background:#DDB43C}
+.btn-ghost{background:transparent; color:var(--deep-ink); border-color:rgba(255,255,255,.4)}
+.btn-ghost:hover{border-color:var(--deep-gold); color:var(--deep-gold)}
+.btn[aria-disabled="true"]{opacity:.55; cursor:not-allowed}
+.cta-note{font-size:.78rem; color:var(--deep-mid)}
+
+/* ---------- Sections ---------- */
+section{padding:4rem 0}
+section.alt{background:var(--surface-2)}
+.shead{margin-bottom:2rem}
+.shead .eyebrow{color:var(--gold)}
+.shead h2{font-size:clamp(1.5rem,3.4vw,2.05rem); margin-top:.5rem}
+.shead p{color:var(--ink-mid); margin-top:.7rem; max-width:44rem}
+.shead p b{color:var(--ink)}
+
+/* Paperless band */
+.paperless{
+  display:flex; gap:1rem; align-items:flex-start; flex-wrap:wrap;
+  border:1px solid var(--gold-rule); background:var(--gold-wash);
+  border-radius:3px; padding:1.1rem 1.3rem; margin-top:1.6rem;
+}
+.paperless .lab{font-size:.72rem; letter-spacing:.16em; font-weight:700; color:var(--gold); white-space:nowrap; padding-top:.2rem}
+.paperless p{font-size:.92rem; color:var(--gold); flex:1; min-width:16rem}
+.paperless p b{font-weight:700}
+.dropped{margin-top:1rem; font-size:.86rem; color:var(--ink-soft)}
+.dropped b{color:var(--ink-mid)}
+.dropped s{opacity:.75}
+
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:3px;
+  padding:1.6rem; box-shadow:var(--shadow);
+}
+.grid2{display:grid; gap:1.1rem; grid-template-columns:repeat(auto-fit,minmax(19rem,1fr))}
+.grid3{display:grid; gap:1.1rem; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+
+.tag{
+  display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.1em;
+  padding:.22rem .6rem; border-radius:2px; background:var(--gold-wash); color:var(--gold);
+}
+.tag.ok{background:var(--ok-wash); color:var(--ok)}
+
+.grouptitle{display:flex; align-items:baseline; gap:.7rem; flex-wrap:wrap}
+.grouptitle h3{font-size:1.25rem}
+.card ul{margin:.9rem 0 0; padding-left:1.15rem; color:var(--ink-mid); font-size:.93rem}
+.card ul li{margin-top:.4rem}
+.card .need{
+  margin-top:1.1rem; padding-top:.9rem; border-top:1px dashed var(--line-firm);
+  font-size:.88rem; color:var(--ink-mid);
+}
+.card .need b{color:var(--ink)}
+
+/* ---------- Track finder ---------- */
+.quiz{display:grid; gap:1rem}
+.q{border:1px solid var(--line); background:var(--surface); border-radius:3px; padding:1.05rem 1.2rem}
+.q > p{font-weight:700; font-size:.98rem}
+.opts{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem}
+.opts label{
+  display:inline-flex; align-items:center; gap:.4rem; cursor:pointer;
+  border:1px solid var(--line-firm); border-radius:999px; padding:.35rem .85rem;
+  font-size:.87rem; transition:background .12s ease, border-color .12s ease;
+}
+.opts input{accent-color:var(--gold-rule); margin:0}
+.opts label:hover{border-color:var(--gold-rule)}
+.opts label:has(input:checked){background:var(--gold-wash); border-color:var(--gold-rule); font-weight:700}
+
+.result{
+  margin-top:1.2rem; border:1.5px solid var(--gold-rule); border-radius:3px;
+  background:var(--surface); padding:1.4rem 1.4rem 1.5rem;
+}
+.result[hidden]{display:none}
+.result .eyebrow{color:var(--gold)}
+.result h3{font-size:1.35rem; margin-top:.45rem}
+.result .why{color:var(--ink-mid); margin-top:.6rem; font-size:.93rem}
+.result ol{margin:1rem 0 0; padding-left:1.3rem; font-size:.92rem; color:var(--ink-mid)}
+.result ol li{margin-top:.35rem}
+.result ol li b{color:var(--ink)}
+
+/* ---------- First-year students ---------- */
+.freshman{
+  background:var(--deep-2); color:var(--deep-ink);
+  border-left:4px solid var(--deep-gold); border-radius:2px; padding:1.8rem;
+}
+.freshman h3{font-size:1.3rem}
+.freshman p{color:#C6D5E5; margin-top:.7rem}
+.fpair{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); margin-top:1.4rem}
+.fpair > div{background:rgba(255,255,255,.06); border:1px solid rgba(201,162,39,.35); padding:1rem 1.1rem; border-radius:2px}
+.fpair .k{font-size:1.7rem; color:var(--deep-gold)}
+.fpair .l{font-size:.84rem; color:#C6D5E5; margin-top:.2rem}
+
+/* ---------- Prizes ---------- */
+.prizewrap{display:grid; gap:2rem; grid-template-columns:minmax(0,1fr)}
+@media (min-width:60rem){ .prizewrap{grid-template-columns:auto minmax(0,1fr); align-items:start; gap:3rem} }
+.hero-num{border-right:0}
+.hero-num .k{font-size:clamp(4rem,13vw,7.5rem); line-height:.9; color:var(--ink)}
+.hero-num .l{font-size:.9rem; color:var(--ink-mid); margin-top:.6rem}
+.hero-num .l2{font-size:.82rem; color:var(--ink-soft); margin-top:.2rem}
+@media (min-width:60rem){ .hero-num{border-right:1px solid var(--line-firm); padding-right:3rem} }
+
+table.prize{width:100%; border-collapse:collapse; font-size:.92rem}
+table.prize caption{text-align:left; font-size:.78rem; color:var(--ink-soft); padding-bottom:.5rem}
+table.prize th,table.prize td{border-bottom:1px solid var(--line); padding:.62rem .5rem; text-align:left}
+table.prize th{font-size:.72rem; letter-spacing:.1em; color:var(--ink-soft); font-weight:600; text-transform:uppercase}
+table.prize td.n{text-align:right; font-family:"Barlow Condensed",sans-serif; font-variant-numeric:tabular-nums; font-weight:700; font-size:1.05rem; white-space:nowrap}
+table.prize tr.sum td{border-top:2px solid var(--line-firm); border-bottom:0; font-weight:700; padding-top:.8rem}
+.tablescroll{overflow-x:auto}
+
+/* ---------- Steps and checklist ---------- */
+.steps{counter-reset:s; display:grid; gap:1.1rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.steps > div{position:relative; padding-top:2.4rem; border-top:2px solid var(--gold-rule)}
+.steps > div::before{
+  counter-increment:s; content:counter(s,decimal-leading-zero);
+  position:absolute; top:.7rem; left:0;
+  font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:.95rem;
+  letter-spacing:.1em; color:var(--gold);
+}
+.steps h4{font-size:1.02rem}
+.steps p{font-size:.9rem; color:var(--ink-mid); margin-top:.4rem}
+
+.checklist{display:grid; gap:.55rem; margin-top:1.2rem}
+.checklist label{
+  display:flex; gap:.7rem; align-items:flex-start; cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); border-radius:2px;
+  padding:.7rem .9rem; font-size:.92rem;
+}
+.checklist input{accent-color:var(--ok); margin-top:.35rem; flex:none}
+.checklist label:has(input:checked){background:var(--ok-wash); border-color:var(--ok)}
+.checklist label:has(input:checked) .txt{text-decoration:line-through; color:var(--ink-soft)}
+.checklist .txt b{display:block}
+.checklist .txt span{font-size:.82rem; color:var(--ink-soft)}
+.progress{display:flex; align-items:center; gap:.7rem; margin-top:1rem; font-size:.85rem; color:var(--ink-mid)}
+.bar{flex:1; height:5px; background:var(--line); border-radius:99px; overflow:hidden}
+.bar i{display:block; height:100%; width:0; background:var(--ok); transition:width .25s ease}
+
+/* ---------- Timeline rail ---------- */
+.rail{position:relative; margin-top:.5rem; padding-left:1.9rem}
+.rail::before{content:""; position:absolute; left:.32rem; top:.5rem; bottom:.5rem; width:1px; background:var(--line-firm)}
+.stage{position:relative; padding:.7rem 0}
+.stage::before{
+  content:""; position:absolute; left:-1.9rem; top:1.15rem;
+  width:.72rem; height:.72rem; border-radius:50%;
+  background:var(--ground); border:1.5px solid var(--line-firm);
+}
+.stage.done::before{background:var(--line-firm); border-color:var(--line-firm)}
+.stage.now::before{background:var(--gold-rule); border-color:var(--gold-rule); box-shadow:0 0 0 4px var(--gold-wash)}
+.stage .d{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:.02em; font-variant-numeric:tabular-nums}
+.stage .t{font-size:.94rem; margin-top:.05rem}
+.stage .n{font-size:.82rem; color:var(--ink-soft); margin-top:.1rem}
+.stage.now .d{color:var(--gold)}
+.stage.now .t{font-weight:700}
+.stage.key .t::after{content:"Attendance required"; margin-left:.5rem; font-size:.68rem; letter-spacing:.08em; background:var(--gold-wash); color:var(--gold); padding:.1rem .4rem; border-radius:2px; vertical-align:.1em}
+
+/* ---------- FAQ ---------- */
+.faq{display:grid; gap:.5rem}
+details{background:var(--surface); border:1px solid var(--line); border-radius:2px}
+details[open]{border-color:var(--line-firm)}
+summary{
+  cursor:pointer; padding:.9rem 1.1rem; font-weight:700; font-size:.95rem;
+  list-style:none; display:flex; justify-content:space-between; gap:1rem; align-items:center;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; font-family:"Barlow Condensed",sans-serif; font-size:1.4rem; color:var(--gold); line-height:1; flex:none}
+details[open] summary::after{content:"–"}
+details .body{padding:0 1.1rem 1.1rem; font-size:.92rem; color:var(--ink-mid)}
+details .body b{color:var(--ink)}
+
+/* ---------- Contact and footer ---------- */
+.contact{display:grid; gap:1.1rem; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.contact .card p{font-size:.9rem; color:var(--ink-mid); margin-top:.5rem}
+.fill{background:var(--gold-wash); color:var(--gold); padding:.05rem .4rem; border-radius:2px; font-size:.9em; font-weight:700}
+footer{background:var(--deep); color:var(--deep-mid); padding:2.6rem 0; font-size:.82rem}
+footer .wrap{display:grid; gap:.9rem}
+footer b{color:var(--deep-ink)}
+footer .fine{color:#8AA0B7; font-size:.76rem; line-height:1.7}
+
+.notice{
+  border-left:3px solid var(--gold-rule); background:var(--gold-wash);
+  color:var(--gold); padding:.8rem 1rem; font-size:.86rem; border-radius:0 2px 2px 0;
+}
+</style>
+</head>
+<body>
+<div id="setupNote"><div class="wrap">
+  <strong>Before publishing</strong>
+  <span>The registration button on this page is not connected to a form yet. Set <code>FORM_URL</code> in the source to the Google registration form URL, and replace the email placeholder in the footer with the real address.</span>
+</div></div>
+
+<header class="topbar"><div class="wrap">
+  <div class="brandmark"><b>YZU Startup Challenge</b><span>YUAN ZE UNIVERSITY 2026</span></div>
+  <nav>
+    <a href="#group">Tracks</a>
+    <a href="#prize">Prizes</a>
+    <a href="#how">How to enter</a>
+    <a href="#when">Timeline</a>
+    <a href="#faq">FAQ</a>
+    <a href="register-zh.html" style="color:var(--deep-gold)">中文</a>
+  </nav>
+</div></header>
+
+<div class="hero">
+  <canvas id="trails" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow">First edition. Fall semester 2026. Theme: AI innovation and application</p>
+    <h1>From one idea<br>to a <em>national contender</em></h1>
+    <p class="fullname">The 1st YZU Startup Challenge
+      <small>Title subject to the official approved announcement. Organized by the Center for Innovation and Entrepreneurship, Yuan Ze University. Advised by the Office of Research and Development, Yuan Ze University.</small>
+    </p>
+    <p class="sub">You do not need a company. You do not need a product. You do not even need teammates yet. You only need one idea you have not given up on.</p>
+
+    <div class="status" id="status">
+      <span class="dot" id="statusDot"></span>
+      <span id="statusText">Loading</span>
+    </div>
+
+    <div class="facts">
+      <div><p class="k num" id="f1">20,000</p><p class="l">Top prize for a single team (NT$)</p></div>
+      <div><p class="k num">11<i> awards</i></p><p class="l">On campus. Every finalist wins something</p></div>
+      <div><p class="k num">3<i> to&nbsp;</i>6</p><p class="l">People per team. Any department, college or year</p></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" id="ctaTop" href="#how">Go to online registration</a>
+      <a class="btn btn-ghost" href="#group">Find my track first</a>
+      <span class="cta-note">No entry fee. Fully online, zero paper. A phone is enough.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ Track finder ============ -->
+<section id="group">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">Step one</p>
+      <h2>First, find your track</h2>
+      <p>There are only two tracks and no sub-categories. Answer four questions to see which one fits and what you need to prepare. This tool runs entirely in your own browser and sends nothing to us.</p>
+    </div>
+
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <p>1. Where is your idea right now?</p>
+        <div class="opts">
+          <label><input type="radio" name="q1" value="0" checked>Still just an idea</label>
+          <label><input type="radio" name="q1" value="1">Some validation or user interviews done</label>
+          <label><input type="radio" name="q1" value="2">Working prototype or demo</label>
+          <label><input type="radio" name="q1" value="3">Already operating, with real users</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>2. Does this build on a capstone project, lab research or coursework?</p>
+        <div class="opts">
+          <label><input type="radio" name="q2" value="0" checked>No connection</label>
+          <label><input type="radio" name="q2" value="2">Yes, it extends a capstone project or lab technology</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>3. Do you have evidence you can show? For example prototype photos, a demo link, usage data or order records.</p>
+        <div class="opts">
+          <label><input type="radio" name="q3" value="0" checked>Not yet</label>
+          <label><input type="radio" name="q3" value="2">Yes, at least one</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>4. How many of your teammates are first-year students admitted in AY 115 (2026), including first-year transfer students?</p>
+        <div class="opts">
+          <label><input type="radio" name="q4" value="no" checked>Fewer than half</label>
+          <label><input type="radio" name="q4" value="yes">Half or more</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="result" id="result" aria-live="polite">
+      <p class="eyebrow">Suggested track</p>
+      <h3 id="rTitle"></h3>
+      <p class="why" id="rWhy"></p>
+      <ol id="rDocs"></ol>
+      <p class="why" style="margin-top:.9rem">Conditional items: if your team includes a <b>member under 18</b>, the team leader also uploads a signed single-page parental or guardian consent form. If your team includes a <b>member from another university</b>, the team leader collects and uploads their proof of enrolment. If neither applies, neither document is needed.</p>
+      <p class="why" id="rBonus" style="margin-top:1rem"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ The two tracks ============ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">Tracks</p>
+      <h2>Two tracks, one for each stage</h2>
+      <p>Your track is fixed once registration closes. If the eligibility check finds a clear mismatch, we will email the team leader to adjust it before the supplementary submission deadline.</p>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="grouptitle"><h3>Idea Track</h3><span class="tag">First and second years and international students welcome</span></div>
+        <ul>
+          <li>For people with an idea but no concrete product or service yet</li>
+          <li>A one-page proposal is all you need. No prototype required</li>
+          <li>Guaranteed final slots for Freshman Teams, plus the Freshman Award</li>
+        </ul>
+        <p class="need"><b>Proposal document:</b> one-page proposal (PDF)</p>
+        <p class="need" style="border-top:0; padding-top:.4rem">
+          <b>Prizes:</b> Gold, Silver and Bronze Awards, one each, NT$25,000 in total
+        </p>
+      </div>
+      <div class="card">
+        <div class="grouptitle"><h3>Venture Track</h3><span class="tag">Capstone projects and lab technology welcome</span></div>
+        <ul>
+          <li>You have a prototype, you are already operating, or you are aiming at a national programme</li>
+          <li>Capstone project extensions and lab technology both qualify</li>
+          <li>Evidence of traction required</li>
+        </ul>
+        <p class="need"><b>Proposal documents:</b> proposal (PDF) plus evidence of traction (prototype photos, a demo link, usage data or order records; at least one)</p>
+        <p class="need" style="border-top:0; padding-top:.4rem">
+          <b>Prizes:</b> Gold, Silver and Bronze Awards, one each, NT$40,000 in total
+        </p>
+      </div>
+    </div>
+
+    <div class="freshman" style="margin-top:1.6rem">
+      <h3>First-year students: you can compete in year one</h3>
+      <p>If half or more of your members are first-year students admitted in AY 115 (2026), including first-year transfer students, simply tick Freshman Team when you register. Freshman Teams qualify for the guaranteed final slots and the Freshman Award.</p>
+      <div class="fpair">
+        <div><p class="k num">3<span style="font-size:.5em"> teams</span></p><p class="l">Guaranteed final slots in the Idea Track. Added on top of the regular slots, so no regular team is displaced. A preliminary score of at least 60 is required</p></div>
+        <div><p class="k num">NT$10,000<span style="font-size:.5em"> total</span></p><p class="l">Freshman Award, 2 awards, for Freshman Teams in the Idea Track only. May be left unawarded</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Prizes ============ -->
+<section id="prize">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">Prizes</p>
+      <h2>11 campus awards. Every finalist wins something.</h2>
+      <p>Final amounts follow the approved budget and will be announced by 13 Nov 2026 (Fri). An amount once announced will not be reduced, only added to. Any award may be left unawarded.</p>
+    </div>
+    <div class="prizewrap">
+      <div class="hero-num">
+        <p class="k num">NT$20,000</p>
+        <p class="l">Single-team maximum</p>
+        <p class="l2">11 awards. NT$93,000 in total prize money.</p>
+      </div>
+      <div class="tablescroll">
+        <table class="prize">
+          <caption>All amounts in New Taiwan dollars, given as the total for each tier. Individual award amounts will be announced with the prize announcement on 13 Nov. Special Awards depend on sponsorship talks and will be announced separately before the final.</caption>
+          <thead><tr><th>Tier</th><th>Awards and basis</th><th style="text-align:right">Total prize</th></tr></thead>
+          <tbody>
+            <tr><td>Main awards</td><td>Venture Track, 3 awards: Gold, Silver and Bronze, one each</td><td class="n">40,000</td></tr>
+            <tr><td>Main awards</td><td>Idea Track, 3 awards: Gold, Silver and Bronze, one each</td><td class="n">25,000</td></tr>
+            <tr><td>Category awards</td><td>Across both tracks, 3 awards: <b>AI Innovation Award</b> (this year's theme award, best use of generative AI), Smart Symbiosis Award (best use of smart technology), Sustainability Impact Award (best social impact)</td><td class="n">18,000</td></tr>
+            <tr><td>Freshman Award</td><td>2 awards, for Freshman Teams in the Idea Track only</td><td class="n">10,000</td></tr>
+            <tr class="sum"><td colspan="2">11 campus awards in total</td><td class="n">93,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:2rem">
+      <h3 style="font-size:1.1rem">Finalist Package: every team that reaches the final gets it</h3>
+      <div class="grid3" style="margin-top:1rem">
+        <ul style="margin:0; padding-left:1.15rem; color:var(--ink-mid); font-size:.92rem">
+          <li>Finalist certificate and public recognition</li>
+          <li>Eligibility for the Center virtual incubation review, with the first-year contract review fee waived on approval</li>
+        </ul>
+        <ul style="margin:0; padding-left:1.15rem; color:var(--ink-mid); font-size:.92rem">
+          <li>In-depth mentoring hours with an industry mentor</li>
+          <li>A named recommendation letter from the Center, usable for U-start, FITI and Taoyuan Youth Innovation Base applications</li>
+        </ul>
+        <ul style="margin:0; padding-left:1.15rem; color:var(--ink-mid); font-size:.92rem">
+          <li>Nomination for international startup competitions</li>
+          <li>Visits to the Taoyuan Youth Innovation Base and Far Eastern Telecom Park (Tpark)</li>
+        </ul>
+      </div>
+      <p class="need"><b>After the competition:</b> winning and high-potential teams continue with the Center towards the NSTC FITI programme (from December) and the Ministry of Education U-start programme (January to February 2027). Campus prize money is the starting point. The external programmes are the real destination.</p>
+    </div>
+
+    <p class="notice" style="margin-top:1.6rem">Please note: <b>registration is fully paperless, but paying out prize money is not.</b> The receipt, the internal split declaration, ID copies and bank account details still have to be submitted as paper originals, because the university accounting and cashier offices do not accept electronic signatures. The team leader of each winning team handles this after the final. It affects winning teams only and has nothing to do with registering.</p>
+  </div>
+</section>
+
+<!-- ============ How to enter ============ -->
+<section id="how" class="alt">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">How to enter</p>
+      <h2>Three steps, all online</h2>
+      <p>This competition follows the paperless policy, and registration is fully digital. A typical team <b>prints nothing, signs nothing and submits no physical document</b>, and can finish on a phone. We do not accept paper, email, walk-in or phone registration. There is no entry fee.</p>
+    </div>
+
+    <div class="paperless">
+      <span class="lab">PAPERLESS</span>
+      <p>Three things are handled entirely online, with no supporting documents to submit: <b>proof of enrolment</b> is established by signing in to the form with your university account, so YZU students do not submit an enrolment certificate or student ID copy; <b>consent</b> is given by one tick box per member inside the form, with the account and submission timestamp recorded, which carries the same effect as a signature, so there is nothing to sign or scan; and <b>the supervisor</b> is confirmed by the Center directly by email, so no supervisor consent form is needed.</p>
+    </div>
+
+    <p class="notice" style="margin-top:1.6rem">Language: <b>write your proposal in either Chinese or English.</b> One language is enough, no bilingual version is needed, and your choice of language does not affect scoring. Teams may also <b>pitch in English at the final round</b>; note this in the remarks field of the registration form.</p>
+
+    <div class="steps" style="margin-top:2.4rem">
+      <div>
+        <h4>Form a team and pick a track</h4>
+        <p>3 to 6 people with one team leader. The leader must be an enrolled YZU student. Teams may mix departments, colleges and year levels. Students from other universities may join, as long as YZU students make up at least half the team. One person should enter one team only.</p>
+      </div>
+      <div>
+        <h4>Prepare your proposal and upload it</h4>
+        <p>Proposals are uploaded as PDF, and Venture Track teams add evidence of traction. Consent is given by tick box inside the form, one per member, with nothing to print or sign. Only teams with a member under 18 or a member from another university upload an extra document, and the team leader does that.</p>
+      </div>
+      <div>
+        <h4>Submit and check for the confirmation email</h4>
+        <p>You are registered once you submit the form and receive the system confirmation email, which is copied to every team member. If it does not arrive, email us before the deadline. The form closes automatically at 17:00 on 16 Oct 2026.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:2.4rem" class="measure">
+      <h3 style="font-size:1.15rem">Documents you need</h3>
+      <p style="color:var(--ink-mid); font-size:.9rem; margin-top:.4rem">Tick states are saved in your own browser and do not sync across devices.</p>
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox" data-k="n1"><span class="txt"><b>Online registration form</b><span>Team roster, track selection, Freshman Team box, one consent tick box per member, and the team leader declaration. Filled in online, nothing to print</span></span></label>
+        <label><input type="checkbox" data-k="n2"><span class="txt"><b>Proposal (PDF)</b><span>One page for the Idea Track. Venture Track teams write to the proposal template. Uploaded directly</span></span></label>
+        <label><input type="checkbox" data-k="n3"><span class="txt"><b>Evidence of traction</b><span>Venture Track only. Prototype photos, a demo link, usage data, order or revenue records; at least one. Upload a file or paste a link</span></span></label>
+        <label><input type="checkbox" data-k="n4"><span class="txt"><b>Parental or guardian consent form (conditional)</b><span>Only if a team member is under 18. The team leader obtains the signature and uploads it. This is the one page in the whole process that still needs printing and signing</span></span></label>
+        <label><input type="checkbox" data-k="n5"><span class="txt"><b>Proof of enrolment for members from other universities (conditional)</b><span>Only if your team includes students from another university. The team leader merges them into a single PDF and uploads it</span></span></label>
+        <label><input type="checkbox" data-k="n6"><span class="txt"><b>Patents, awards or partnership evidence (optional)</b><span>Attach if you have them. Not having them does not affect eligibility</span></span></label>
+      </div>
+      <div class="progress"><span id="ckCount">0 / 6</span><span class="bar"><i id="ckBar"></i></span></div>
+      <p class="dropped"><b>Not required</b>: proof of enrolment or student ID copy for YZU students, a scanned signed consent form, a supervisor consent form. <b>A team made up entirely of YZU students who are all 18 or over has nothing to sign at all; submitting the online form completes the registration.</b></p>
+    </div>
+
+    <div class="card" style="margin-top:2.4rem">
+      <h3 style="font-size:1.1rem">Document downloads</h3>
+      <p style="color:var(--ink-mid); font-size:.92rem; margin-top:.5rem">The competition regulations, schedule, registration guide, registration field reference and proposal template are in one cloud folder. <b>No sign-in is needed to open it</b>, so members from other universities can read them too. Every section of the proposal template carries a writing prompt, so you can download it and write straight into it.</p>
+      <p style="margin-top:1rem"><a href="https://drive.google.com/drive/folders/1uWGMtvCsgON4hebxpN9OdQkOcb3RZ5D0" target="_blank" rel="noopener" style="color:var(--deep-gold); font-weight:700">Open the document folder &rarr;</a></p>
+      <p class="need">The full text of the <b>Participation Agreement and Personal Data Consent</b> is linked inside the registration form itself, and will be added to this folder once the legal review is complete. Nothing needs to be printed or signed to register.</p>
+    </div>
+
+    <div class="cta-row" style="margin-top:2.4rem">
+      <a class="btn btn-primary" id="ctaMain" href="#how" style="color:#22190A">Go to the online registration form</a>
+      <span class="cta-note" style="color:var(--ink-mid)">Registration runs 14 Sep (Mon) to 16 Oct (Fri) 17:00. The form closes automatically after that.</span>
+    </div>
+
+    <p class="notice" style="margin-top:1.6rem">The eligibility check runs from 19 Oct (Mon) to 23 Oct (Fri). If anything is missing we email the team leader, and the <b>supplementary submission deadline is 23 Oct (Fri) 17:00</b>. After that the registration counts as incomplete. Make sure the team leader inbox is working, and add the Center address to your contacts so our mail does not end up in spam.</p>
+  </div>
+</section>
+
+<!-- ============ Timeline ============ -->
+<section id="when">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">Timeline</p>
+      <h2>September to December 2026</h2>
+      <p>The dates below are provisional and the official announcement prevails. The organizer may adjust the number of finalists and the schedule according to how many teams enter.</p>
+    </div>
+    <div class="rail measure" id="rail"></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">FAQ</p>
+      <h2>What people ask before they register</h2>
+    </div>
+    <div class="faq measure">
+      <details><summary>Can I enter on my own?</summary><div class="body">No. A team is 3 to 6 people; finding people to build with is part of the exercise. If you have not found teammates yet, come to the kick-off briefing on 16 Sep or to either workshop. Other people there are looking too.</div></details>
+      <details><summary>Can first-year students enter?</summary><div class="body"><b>Yes, and we particularly encourage it.</b> The Idea Track is designed for ideas that have not taken shape yet. If half or more of your members are first-year students admitted in AY 115 (2026), including first-year transfer students, tick Freshman Team when you register and you qualify for the guaranteed final slots and the Freshman Award.</div></details>
+      <details><summary>I have no startup experience and no product. Can I still enter?</summary><div class="body">Yes. The Idea Track asks for a one-page proposal. No prototype, no revenue and no company required. Judges look at whether the problem you observed is real and whether the solution holds up, not at how far you have already got.</div></details>
+      <details><summary>Do we need a supervisor?</summary><div class="body">No. One or two supervisors are optional, and having none affects neither your eligibility nor your score. A named supervisor may not also serve as a judge for this competition.</div></details>
+      <details><summary>We registered for the Idea Track. Can we switch to the Venture Track?</summary><div class="body">Not after registration closes. Before the deadline you can edit your own form entry. If the eligibility check finds a clear mismatch, we will email the team leader to adjust it before the supplementary submission deadline.</div></details>
+      <details><summary>Can we team up with students from other universities?</summary><div class="body">Yes. YZU students must make up at least half the team, and the team leader must be an enrolled YZU student. Members from other universities need to attach proof of enrolment from their own institution. Prize money is always paid to the team leader, who is a YZU student, and the team agrees its own internal split.</div></details>
+      <details><summary>Can we enter with a capstone project or a lab result?</summary><div class="body">Yes, and this is where most Venture Track entries come from. Push what you have already built one step further: towards a business model, and towards something you can submit to FITI and U-start. If lab technology is involved, confirm IP ownership with your supervising professor first.</div></details>
+      <details><summary>Do I have to write in Chinese?</summary><div class="body">No. <b>Write your proposal in either Chinese or English. One language is enough, no bilingual version is needed, and your language choice does not affect scoring.</b> You may also pitch in English at the final round; note this in the remarks field of the registration form.</div></details>
+      <details><summary>I am an international student. What else should I know?</summary><div class="body">You are very welcome, and the Idea Track is a good place to start. Two things worth knowing. <b>Language:</b> your proposal may be in Chinese or English, one language only, and the choice does not affect scoring; you may also pitch in English at the final round by noting it in the remarks field of the registration form. <b>Documents:</b> the registration form is opened through a university account, and that sign-in record is what replaces a proof of enrolment, so students whose YZU account gives access to the form do not submit one. If your account status differs for any reason, email the Center before the deadline and we will confirm how to proceed.</div></details>
+      <details><summary>Can the same idea be entered by two teams?</summary><div class="body">One person should enter one team only. If the same person is listed on two or more teams, we will email each team leader to settle on one entry before the supplementary submission deadline. If nobody replies in time, the team whose form was submitted earlier is the one kept.</div></details>
+      <details><summary>How long should the proposal be?</summary><div class="body">One page for the Idea Track. Five to eight pages is a good length for the Venture Track. Both follow the proposal template, which carries a writing prompt in every section, so you can simply work through it.</div></details>
+      <details><summary>Are the workshops compulsory?</summary><div class="body">No. Both workshops are open, free and take no attendance, and you can come before you register. 23 Sep covers market validation and business model design with GenAI; 7 Oct covers producing your proposal and pitch with GenAI. The final pitch is five minutes, and the second workshop practises exactly that.</div></details>
+      <details><summary>Is there an entry fee?</summary><div class="body">No. Entry is free.</div></details>
+      <details><summary>Is it really zero paper?</summary><div class="body"><b>Yes.</b> This competition follows the paperless policy and registration is fully digital. A team made up entirely of YZU students who are all 18 or over has <b>nothing to print and nothing to sign</b>, and can register on a phone. Only two situations call for one extra upload by the team leader: a team member under 18 (a single-page parental or guardian consent form with a signature), or a member from another university (their proof of enrolment).</div></details>
+      <details><summary>If nobody signs the consent form, what counts as consent?</summary><div class="body">The full text of the consent terms is available to read inside the registration form, and <b>every team member has their own compulsory tick box</b>, which the team leader ticks after confirming with that member one by one. At the end of the form there is a team leader declaration. The system automatically records the account, the email address and the submission timestamp, and that record is the evidence of consent. The confirmation email is also <b>copied to every team member</b>, so you will know you have been listed and can reply to withdraw before the supplementary submission deadline if you object.</div></details>
+      <details><summary>Why don't YZU students submit proof of enrolment?</summary><div class="body">Because the registration form has to be opened with a <b>university account</b> before you can fill it in and upload files. Being able to sign in already proves you are enrolled, so handing in a student ID copy on top of that adds nothing. Members from other universities have no YZU account, so their proof of enrolment is collected and uploaded by the team leader.</div></details>
+      <details><summary>Is everything online after we win too?</summary><div class="body">No. <b>Registration is fully paperless, but paying out prize money is not.</b> The receipt, the internal split declaration, ID copies and bank account details still have to be submitted as paper originals, because the university accounting and cashier offices do not accept electronic signatures. This happens after the final in December and is handled by the team leader of each winning team, so leave time for it.</div></details>
+      <details><summary>How is the prize money split?</summary><div class="body">Prize money is paid to the team representative, that is the team leader, against a signed receipt. How the team splits it internally is agreed within the team and recorded in a split declaration. The Center does not intervene and does not arbitrate.</div></details>
+      <details><summary>Can I call you?</summary><div class="body">This competition is run digitally end to end, and <b>enquiries are handled by email or online form only. We do not take enquiries by phone.</b> Email usually gets a reply within one working day, and it leaves a record, so nothing falls through the cracks.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Contact ============ -->
+<section>
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">Contact</p>
+      <h2>How to reach us</h2>
+    </div>
+    <div class="contact">
+      <div class="card">
+        <h3 style="font-size:1.05rem">Email</h3>
+        <p><span class="fill" data-fill="email">[Email: TBC]</span></p>
+        <p>This competition is run digitally end to end. Enquiries are handled by email or online form only, and we do not take enquiries by phone. Put YZU Startup Challenge and your team name in the subject line.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:1.05rem">Kick-off Briefing</h3>
+        <p>16 Sep 2026 (Wed), 12:10 to 13:30, Center for Innovation and Entrepreneurship, Building 1. Held onsite with simultaneous online access (the meeting link will be announced). You can ask about teams and track choice on the spot.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <p><b>The 1st YZU Startup Challenge</b> &nbsp;YZU Startup Challenge 2026</p>
+  <p>Organized by the Center for Innovation and Entrepreneurship, Yuan Ze University. &nbsp;Advised by the Office of Research and Development, Yuan Ze University.</p>
+  <p class="fine">
+    The competition title is subject to the official approved announcement. The schedule and prize amounts on this page are provisional and the official announcement of the Center prevails. Prize amounts follow the approved budget and will be announced by 13 Nov 2026.<br>
+    Co-organizers will be announced once confirmed. Personal data collected during registration is handled under the Personal Data Protection Act; see the Participation Agreement and Personal Data Consent for details.<br>
+    This page is a registration guide. Where it differs from the official competition regulations, the regulations prevail.<br>
+    This is the English version. The Chinese version prevails in the event of any discrepancy.
+  </p>
+</div></footer>
+
+<script>
+/* TODO for the Center: replace the two values below with the real URL and address */
+const FORM_URL   = "https://docs.google.com/forms/d/e/1FAIpQLSf0d3UMGaI9MdZLD1JkoO_qaOIDyXeIM_8PZU00zS2wAc7VPQ/viewform";
+const CENTER_MAIL = "johnnyweb@saturn.yzu.edu.tw";
+
+/* ---------- Schedule data (single source of truth: core spec file) ---------- */
+const STAGES = [
+  {d:"14 Sep (Mon)", t:"Registration opens",          n:"First day of semester 1, AY 115 (2026 fall)", s:"2026-09-14", e:"2026-09-14"},
+  {d:"16 Sep (Wed)", t:"Kick-off Briefing", n:"12:10 to 13:30. Center for Innovation and Entrepreneurship, Building 1. Onsite with simultaneous online access. Open to all", s:"2026-09-16", e:"2026-09-16"},
+  {d:"23 Sep (Wed)", t:"Workshop 1: market validation and business model design with GenAI", n:"13:10 to 16:00. Open to all", s:"2026-09-23", e:"2026-09-23"},
+  {d:"7 Oct (Wed)",  t:"Workshop 2: proposal and pitch production with GenAI", n:"13:10 to 16:00. Open to all", s:"2026-10-07", e:"2026-10-07"},
+  {d:"16 Oct (Fri)", t:"Registration closes",         n:"The form closes automatically at 17:00. No late entries", s:"2026-10-16", e:"2026-10-16"},
+  {d:"19 – 23 Oct", t:"Eligibility check and supplementary submission", n:"Supplementary deadline 23 Oct (Fri) 17:00", s:"2026-10-19", e:"2026-10-23"},
+  {d:"26 – 30 Oct", t:"Preliminary Review (online, document-based)", n:"No in-person preliminary round", s:"2026-10-26", e:"2026-10-30"},
+  {d:"3 Nov (Tue)",  t:"Finalists announced",         n:"15 to 20 teams across both tracks", s:"2026-11-03", e:"2026-11-03"},
+  {d:"11 Nov (Wed)", t:"Proposal Clinic 1 (one-on-one review)", n:"Finalist teams", s:"2026-11-11", e:"2026-11-11", key:true},
+  {d:"25 Nov (Wed)", t:"Proposal Clinic 2",           n:"Finalist teams", s:"2026-11-25", e:"2026-11-25", key:true},
+  {d:"7 Dec (Mon)", t:"Final slide deck due",        n:"17:00", s:"2026-12-07", e:"2026-12-07"},
+  {d:"11 Dec (Fri)",  t:"Final Demo Day and awards ceremony", n:"13:00 to 17:30. 5-minute pitch plus 3-minute Q and A", s:"2026-12-11", e:"2026-12-11"}
+];
+
+const OPEN  = new Date("2026-09-14T00:00:00+08:00");
+const CLOSE = new Date("2026-10-16T17:00:00+08:00");
+const ANNOUNCE = new Date("2026-11-03T23:59:59+08:00");
+const FINAL = new Date("2026-12-11T17:30:00+08:00");
+
+/* ---------- Wire up the form links ---------- */
+(function wireLinks(){
+  const ok = FORM_URL && FORM_URL.trim().length > 0;
+  ["ctaTop","ctaMain"].forEach(function(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(ok){ el.href = FORM_URL; el.target = "_blank"; el.rel = "noopener"; }
+    else { el.setAttribute("aria-disabled","true"); }
+  });
+  if(!ok){ document.getElementById("setupNote").classList.add("on"); }
+
+  if(CENTER_MAIL){
+    document.querySelectorAll('[data-fill="email"]').forEach(function(n){
+      n.textContent = CENTER_MAIL; n.classList.remove("fill");
+    });
+  }
+})();
+
+/* ---------- Current stage ---------- */
+(function status(){
+  const now = new Date();
+  const dot = document.getElementById("statusDot");
+  const txt = document.getElementById("statusText");
+  const day = 86400000;
+  let html;
+  if(now < OPEN){
+    const n = Math.ceil((OPEN - now) / day);
+    html = 'Registration is not open yet. <b>' + n + '</b> days until it opens on 14 Sep';
+  } else if(now <= CLOSE){
+    const n = Math.ceil((CLOSE - now) / day);
+    dot.classList.add("live");
+    html = 'Registration is open. <b>' + n + '</b> days left before 16 Oct, 17:00';
+  } else if(now <= ANNOUNCE){
+    html = 'Registration has closed. Eligibility check and preliminary review under way';
+  } else if(now <= FINAL){
+    html = 'Finalists announced. Final Demo Day on 11 Dec';
+  } else {
+    html = 'The first edition has finished. Thank you to every team that entered';
+  }
+  txt.innerHTML = html;
+})();
+
+/* ---------- Track finder ---------- */
+(function quiz(){
+  const quizEl = document.getElementById("quiz");
+  const res = document.getElementById("result");
+  const rTitle = document.getElementById("rTitle");
+  const rWhy = document.getElementById("rWhy");
+  const rDocs = document.getElementById("rDocs");
+  const rBonus = document.getElementById("rBonus");
+
+  function val(name){
+    const el = quizEl.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : "0";
+  }
+
+  function render(){
+    const score = Number(val("q1")) + Number(val("q2")) + Number(val("q3"));
+    const fresh = val("q4") === "yes";
+    const practical = score >= 3;
+
+    rTitle.textContent = practical ? "Venture Track" : "Idea Track";
+    rWhy.textContent = practical
+      ? "You already have concrete progress or something you can show, so the Venture Track fits. Venture Track scoring counts progress and early results as a separate 20 percent, so what you have built earns points directly."
+      : "Your idea is still taking shape, and that is exactly what the Idea Track is for. No prototype and no revenue required. Judges look at whether the problem you observed is real and whether the solution holds up.";
+
+    const docs = practical
+      ? ["<b>Proposal (PDF)</b>, ideally 5 to 8 pages, written to the proposal template and uploaded directly",
+         "<b>Evidence of traction</b>: prototype photos, a demo link, usage data, order or revenue records; at least one. Upload a file or paste a link",
+         "<b>Consent is ticked inside the form, one box per member.</b> Nothing to print, nothing to sign, no scan to upload",
+         "YZU students need <b>no proof of enrolment</b>. Signing in to the form with a university account is the proof"]
+      : ["<b>One-page proposal (PDF)</b>, written to the six sections of the proposal template and uploaded directly",
+         "<b>Consent is ticked inside the form, one box per member.</b> Nothing to print, nothing to sign, no scan to upload",
+         "YZU students need <b>no proof of enrolment</b>. Signing in to the form with a university account is the proof"];
+    rDocs.innerHTML = docs.map(function(d){ return "<li>" + d + "</li>"; }).join("");
+
+    if(fresh && !practical){
+      rBonus.innerHTML = '<span class="tag ok">Freshman Team</span> Remember to tick Freshman Team on the registration form. You qualify for the Idea Track guaranteed final slots for first-year teams (at least 3 teams, added on top of the regular slots, with a preliminary score of at least 60 required), and for the Freshman Award (2 awards, NT$10,000 in total).';
+    } else if(fresh && practical){
+      rBonus.innerHTML = '<span class="tag ok">Freshman Team</span> Remember to tick Freshman Team on the registration form. One caution: the guaranteed final slots and the Freshman Award <b>apply to the Idea Track only</b>. If those matter to you, consider entering the Idea Track instead. If your results are already solid, the Venture Track has the higher ceiling (up to NT$20,000).';
+    } else {
+      rBonus.innerHTML = 'If half or more of your members are first-year students admitted in AY 115 (2026), remember to tick Freshman Team on the registration form. That is what unlocks the Idea Track guaranteed final slots and the Freshman Award.';
+    }
+    res.hidden = false;
+  }
+
+  quizEl.addEventListener("change", render);
+  render();
+})();
+
+/* ---------- Document checklist ---------- */
+(function checklist(){
+  const KEY = "yzc-reg-checklist";
+  const box = document.getElementById("checklist");
+  const boxes = Array.prototype.slice.call(box.querySelectorAll("input"));
+  const count = document.getElementById("ckCount");
+  const bar = document.getElementById("ckBar");
+
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e){ saved = {}; }
+
+  boxes.forEach(function(b){ if(saved[b.dataset.k]) b.checked = true; });
+
+  function sync(){
+    const n = boxes.filter(function(b){ return b.checked; }).length;
+    count.textContent = n + " / " + boxes.length;
+    bar.style.width = (n / boxes.length * 100) + "%";
+    const out = {};
+    boxes.forEach(function(b){ if(b.checked) out[b.dataset.k] = 1; });
+    try { localStorage.setItem(KEY, JSON.stringify(out)); } catch(e){}
+  }
+  box.addEventListener("change", sync);
+  sync();
+})();
+
+/* ---------- Timeline rail ---------- */
+(function rail(){
+  const el = document.getElementById("rail");
+  const now = new Date();
+  el.innerHTML = STAGES.map(function(s){
+    const start = new Date(s.s + "T00:00:00+08:00");
+    const end = new Date(s.e + "T23:59:59+08:00");
+    let cls = "stage";
+    if(now > end) cls += " done";
+    else if(now >= start) cls += " now";
+    if(s.key) cls += " key";
+    return '<div class="' + cls + '">' +
+           '<p class="d">' + s.d + '</p>' +
+           '<p class="t">' + s.t + '</p>' +
+           '<p class="n">' + s.n + '</p></div>';
+  }).join("");
+})();
+
+/* ---------- Hero rising light trails ---------- */
+(function trails(){
+  const c = document.getElementById("trails");
+  if(!c) return;
+  const host = c.parentElement;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ctx = c.getContext("2d");
+  let w = 0, h = 0, lines = [], raf = 0;
+
+  function seed(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = c.clientWidth; h = c.clientHeight;
+    if(w < 2 || h < 2) return false;   /* layout not settled yet, ResizeObserver will call again */
+    c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    lines = [];
+    const n = w < 640 ? 7 : 13;
+    for(let i = 0; i < n; i++){
+      lines.push({
+        x: Math.random() * w * 1.5 - w * 0.35,
+        y: -h * 0.25 + Math.random() * h * 1.5,   /* spread over full height so frame one already works */
+        len: 90 + Math.random() * 260,
+        v: 0.12 + Math.random() * 0.42,
+        a: 0.05 + Math.random() * 0.22,
+        gold: Math.random() < 0.45
+      });
+    }
+    return true;
+  }
+
+  function draw(){
+    if(w < 2 || h < 2) return;
+    ctx.clearRect(0, 0, w, h);
+    const k = 0.62;
+    for(const L of lines){
+      const g = ctx.createLinearGradient(L.x, L.y, L.x + L.len * k, L.y - L.len);
+      const col = L.gold ? "201,162,39" : "255,255,255";
+      g.addColorStop(0, "rgba(" + col + ",0)");
+      g.addColorStop(0.55, "rgba(" + col + "," + L.a + ")");
+      g.addColorStop(1, "rgba(" + col + ",0)");
+      ctx.strokeStyle = g;
+      ctx.lineWidth = L.gold ? 1.4 : 0.8;
+      ctx.beginPath();
+      ctx.moveTo(L.x, L.y);
+      ctx.lineTo(L.x + L.len * k, L.y - L.len);
+      ctx.stroke();
+      if(!reduce){
+        L.y -= L.v; L.x += L.v * k;
+        if(L.y + L.len < -20){ L.y = h + 40 + Math.random() * 120; L.x = Math.random() * w * 1.5 - w * 0.35; }
+      }
+    }
+    if(!reduce) raf = requestAnimationFrame(draw);
+  }
+
+  function start(){ cancelAnimationFrame(raf); if(seed()) draw(); }
+
+  /* layout can settle after the script runs (font loading, panel resize), so retry until we have a size */
+  let tries = 0;
+  function tryStart(){
+    start();
+    if((w < 2 || h < 2) && tries < 20){ tries++; setTimeout(tryStart, 150); }
+  }
+  tryStart();
+
+  if(window.ResizeObserver){
+    let t0;
+    new ResizeObserver(function(){ clearTimeout(t0); t0 = setTimeout(start, 120); }).observe(host);
+  } else {
+    let t; window.addEventListener("resize", function(){ clearTimeout(t); t = setTimeout(start, 200); });
+  }
+  window.addEventListener("load", start);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(start); }
+})();
+</script>
+
+</body>
+</html>

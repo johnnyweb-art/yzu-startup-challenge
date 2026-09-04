@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="元智大學第一屆「元創盃」創新創業競賽線上報名頁。全程無紙化，含組別檢核、應備文件清單、獎項、賽程與常見問題。報名期間 2026 年 9 月 14 日至 10 月 16 日。">
+<meta name="robots" content="index, follow">
+<title>元創盃報名</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+
+<style>
+/* ============================================================
+   元創盃報名網頁
+   品牌來源：12_主視覺與海報設計規格表（深海軍藍 #0E2A47＋金銅 #C9A227）
+   ★ 中心待辦：把下方 <script> 裡的 FORM_URL 換成 Google 報名表單網址
+   ============================================================ */
+
+:root{
+  --ground:#F5F1E6; --surface:#FFFFFF; --surface-2:#EFEADB;
+  --ink:#0E2A47; --ink-mid:#4A5D75; --ink-soft:#71829A;
+  --line:#DCD5C4; --line-firm:#B9B099;
+  --accent:#0E2A47; --accent-ink:#FFFFFF;
+  --gold:#8A6A12; --gold-rule:#C9A227; --gold-wash:#F3E9C7;
+  --ok:#2E7D5B; --ok-wash:#E2F0E9;
+  --warn:#8A6400; --warn-wash:#F7EBCC;
+  --shadow:0 1px 0 rgba(14,42,71,.06), 0 8px 28px -18px rgba(14,42,71,.45);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0B2038; --surface:#12304C; --surface-2:#1B3B5F;
+    --ink:#EAF1F8; --ink-mid:#AFC2D6; --ink-soft:#8397AC;
+    --line:#23486D; --line-firm:#37628C;
+    --accent:#C9A227; --accent-ink:#0B2038;
+    --gold:#D9B43F; --gold-rule:#C9A227; --gold-wash:#2A3C46;
+    --ok:#6FC79C; --ok-wash:#173D31;
+    --warn:#E0A200; --warn-wash:#3A3018;
+    --shadow:0 1px 0 rgba(0,0,0,.25), 0 12px 32px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0B2038; --surface:#12304C; --surface-2:#1B3B5F;
+  --ink:#EAF1F8; --ink-mid:#AFC2D6; --ink-soft:#8397AC;
+  --line:#23486D; --line-firm:#37628C;
+  --accent:#C9A227; --accent-ink:#0B2038;
+  --gold:#D9B43F; --gold-rule:#C9A227; --gold-wash:#2A3C46;
+  --ok:#6FC79C; --ok-wash:#173D31;
+  --warn:#E0A200; --warn-wash:#3A3018;
+  --shadow:0 1px 0 rgba(0,0,0,.25), 0 12px 32px -20px rgba(0,0,0,.8);
+}
+
+/* 深色帶：不隨主題變動，對應海報主視覺深底版 */
+:root{
+  --deep:#0E2A47; --deep-2:#1B3B5F; --deep-ink:#FFFFFF;
+  --deep-mid:#BACBDD; --deep-gold:#C9A227;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Noto Sans TC","Barlow",system-ui,"Microsoft JhengHei",sans-serif;
+  font-size:16px; line-height:1.75; letter-spacing:.01em;
+  font-feature-settings:"palt" 1;
+}
+h1,h2,h3,h4{text-wrap:balance; line-height:1.25; margin:0; font-weight:700}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold-rule); outline-offset:3px; border-radius:2px}
+@media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important}}
+
+.wrap{width:min(100% - 2.5rem, 68rem); margin-inline:auto}
+.measure{max-width:44rem}
+.num{font-family:"Barlow Condensed","Barlow",sans-serif; font-variant-numeric:tabular-nums; font-weight:700; letter-spacing:.01em}
+.eyebrow{
+  font-family:"Barlow","Noto Sans TC",sans-serif; font-weight:600;
+  font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
+}
+
+/* ---------- 維護提示（填入表單網址後自動消失） ---------- */
+#setupNote{
+  display:none; background:var(--warn-wash); color:var(--warn);
+  border-bottom:1px solid var(--gold-rule); padding:.7rem 0; font-size:.85rem;
+}
+#setupNote.on{display:block}
+#setupNote .wrap{display:flex; gap:.6rem; align-items:baseline; flex-wrap:wrap}
+#setupNote strong{font-weight:700}
+
+/* ---------- 頁首 ---------- */
+.topbar{
+  background:var(--deep); color:var(--deep-ink);
+  border-bottom:1.5px solid var(--deep-gold);
+}
+.topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.8rem 0}
+.brandmark{display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap}
+.brandmark b{font-size:1.02rem; letter-spacing:.05em}
+.brandmark span{font-size:.72rem; color:var(--deep-mid); letter-spacing:.16em}
+.topbar nav{display:flex; gap:1.1rem; font-size:.82rem; color:var(--deep-mid)}
+.topbar nav a{text-decoration:none; padding-bottom:2px; border-bottom:1px solid transparent}
+.topbar nav a:hover{color:var(--deep-ink); border-bottom-color:var(--deep-gold)}
+@media (max-width:720px){ .topbar nav{display:none} }
+
+/* ---------- Hero ---------- */
+.hero{position:relative; background:var(--deep); color:var(--deep-ink); overflow:hidden}
+.hero canvas{position:absolute; inset:0; width:100%; height:100%; opacity:.5}
+.hero .wrap{position:relative; padding:4.2rem 0 3.2rem}
+.hero .eyebrow{color:var(--deep-gold)}
+.hero h1{
+  font-size:clamp(2.5rem,7.5vw,4.6rem); font-weight:900; letter-spacing:-.01em;
+  margin:.9rem 0 0; line-height:1.14;
+}
+.hero h1 em{font-style:normal; color:var(--deep-gold)}
+.hero .fullname{margin-top:1.1rem; font-size:clamp(1rem,2.4vw,1.3rem); font-weight:700}
+.hero .fullname small{display:block; font-weight:400; font-size:.78rem; color:var(--deep-mid); margin-top:.3rem}
+.hero .sub{margin-top:.9rem; color:var(--deep-mid); max-width:34rem}
+
+.status{
+  display:inline-flex; align-items:center; gap:.55rem; margin-top:1.6rem;
+  border:1px solid var(--deep-gold); border-radius:999px;
+  padding:.42rem .95rem; font-size:.86rem; font-weight:500;
+  background:rgba(201,162,39,.1);
+}
+.status .dot{width:.5rem; height:.5rem; border-radius:50%; background:var(--deep-gold); flex:none}
+.status .dot.live{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.status b{font-family:"Barlow Condensed",sans-serif; font-size:1.15rem; font-variant-numeric:tabular-nums}
+
+.facts{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:2.4rem; border-top:1px solid rgba(255,255,255,.18);
+}
+.facts div{padding:1.1rem 1.2rem 0 0}
+.facts div + div{border-left:1px solid rgba(255,255,255,.18); padding-left:1.2rem}
+.facts .k{font-size:clamp(1.7rem,5vw,2.7rem); color:var(--deep-ink)}
+.facts .k i{font-style:normal; font-size:.5em; color:var(--deep-mid); margin-left:.2em}
+.facts .l{font-size:.74rem; color:var(--deep-mid); letter-spacing:.06em; margin-top:.15rem}
+
+.cta-row{display:flex; gap:.75rem; flex-wrap:wrap; margin-top:2.2rem; align-items:center}
+.btn{
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-family:inherit; font-size:.95rem; font-weight:700; text-decoration:none;
+  padding:.85rem 1.5rem; border-radius:2px; border:1.5px solid transparent; cursor:pointer;
+  transition:transform .12s ease, background .12s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--deep-gold); color:#22190A; border-color:var(--deep-gold)}
+.btn-primary:hover{background:#DDB43C}
+.btn-ghost{background:transparent; color:var(--deep-ink); border-color:rgba(255,255,255,.4)}
+.btn-ghost:hover{border-color:var(--deep-gold); color:var(--deep-gold)}
+.btn[aria-disabled="true"]{opacity:.55; cursor:not-allowed}
+.cta-note{font-size:.78rem; color:var(--deep-mid)}
+
+/* ---------- 區塊 ---------- */
+section{padding:4rem 0}
+section.alt{background:var(--surface-2)}
+.shead{margin-bottom:2rem}
+.shead .eyebrow{color:var(--gold)}
+.shead h2{font-size:clamp(1.5rem,3.4vw,2.05rem); margin-top:.5rem}
+.shead p{color:var(--ink-mid); margin-top:.7rem; max-width:44rem}
+.shead p b{color:var(--ink)}
+
+/* 無紙化條 */
+.paperless{
+  display:flex; gap:1rem; align-items:flex-start; flex-wrap:wrap;
+  border:1px solid var(--gold-rule); background:var(--gold-wash);
+  border-radius:3px; padding:1.1rem 1.3rem; margin-top:1.6rem;
+}
+.paperless .lab{font-size:.72rem; letter-spacing:.16em; font-weight:700; color:var(--gold); white-space:nowrap; padding-top:.2rem}
+.paperless p{font-size:.92rem; color:var(--gold); flex:1; min-width:16rem}
+.paperless p b{font-weight:700}
+.dropped{margin-top:1rem; font-size:.86rem; color:var(--ink-soft)}
+.dropped b{color:var(--ink-mid)}
+.dropped s{opacity:.75}
+
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:3px;
+  padding:1.6rem; box-shadow:var(--shadow);
+}
+.grid2{display:grid; gap:1.1rem; grid-template-columns:repeat(auto-fit,minmax(19rem,1fr))}
+.grid3{display:grid; gap:1.1rem; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+
+.tag{
+  display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.1em;
+  padding:.22rem .6rem; border-radius:2px; background:var(--gold-wash); color:var(--gold);
+}
+.tag.ok{background:var(--ok-wash); color:var(--ok)}
+
+.grouptitle{display:flex; align-items:baseline; gap:.7rem; flex-wrap:wrap}
+.grouptitle h3{font-size:1.25rem}
+.card ul{margin:.9rem 0 0; padding-left:1.15rem; color:var(--ink-mid); font-size:.93rem}
+.card ul li{margin-top:.4rem}
+.card .need{
+  margin-top:1.1rem; padding-top:.9rem; border-top:1px dashed var(--line-firm);
+  font-size:.88rem; color:var(--ink-mid);
+}
+.card .need b{color:var(--ink)}
+
+/* ---------- 檢核器 ---------- */
+.quiz{display:grid; gap:1rem}
+.q{border:1px solid var(--line); background:var(--surface); border-radius:3px; padding:1.05rem 1.2rem}
+.q > p{font-weight:700; font-size:.98rem}
+.opts{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem}
+.opts label{
+  display:inline-flex; align-items:center; gap:.4rem; cursor:pointer;
+  border:1px solid var(--line-firm); border-radius:999px; padding:.35rem .85rem;
+  font-size:.87rem; transition:background .12s ease, border-color .12s ease;
+}
+.opts input{accent-color:var(--gold-rule); margin:0}
+.opts label:hover{border-color:var(--gold-rule)}
+.opts label:has(input:checked){background:var(--gold-wash); border-color:var(--gold-rule); font-weight:700}
+
+.result{
+  margin-top:1.2rem; border:1.5px solid var(--gold-rule); border-radius:3px;
+  background:var(--surface); padding:1.4rem 1.4rem 1.5rem;
+}
+.result[hidden]{display:none}
+.result .eyebrow{color:var(--gold)}
+.result h3{font-size:1.35rem; margin-top:.45rem}
+.result .why{color:var(--ink-mid); margin-top:.6rem; font-size:.93rem}
+.result ol{margin:1rem 0 0; padding-left:1.3rem; font-size:.92rem; color:var(--ink-mid)}
+.result ol li{margin-top:.35rem}
+.result ol li b{color:var(--ink)}
+
+/* ---------- 大一新生 ---------- */
+.freshman{
+  background:var(--deep-2); color:var(--deep-ink);
+  border-left:4px solid var(--deep-gold); border-radius:2px; padding:1.8rem;
+}
+.freshman h3{font-size:1.3rem}
+.freshman p{color:#C6D5E5; margin-top:.7rem}
+.fpair{display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); margin-top:1.4rem}
+.fpair > div{background:rgba(255,255,255,.06); border:1px solid rgba(201,162,39,.35); padding:1rem 1.1rem; border-radius:2px}
+.fpair .k{font-size:1.7rem; color:var(--deep-gold)}
+.fpair .l{font-size:.84rem; color:#C6D5E5; margin-top:.2rem}
+
+/* ---------- 獎項 ---------- */
+.prizewrap{display:grid; gap:2rem; grid-template-columns:minmax(0,1fr)}
+@media (min-width:60rem){ .prizewrap{grid-template-columns:auto minmax(0,1fr); align-items:start; gap:3rem} }
+.hero-num{border-right:0}
+.hero-num .k{font-size:clamp(4rem,13vw,7.5rem); line-height:.9; color:var(--ink)}
+.hero-num .l{font-size:.9rem; color:var(--ink-mid); margin-top:.6rem}
+.hero-num .l2{font-size:.82rem; color:var(--ink-soft); margin-top:.2rem}
+@media (min-width:60rem){ .hero-num{border-right:1px solid var(--line-firm); padding-right:3rem} }
+
+table.prize{width:100%; border-collapse:collapse; font-size:.92rem}
+table.prize caption{text-align:left; font-size:.78rem; color:var(--ink-soft); padding-bottom:.5rem}
+table.prize th,table.prize td{border-bottom:1px solid var(--line); padding:.62rem .5rem; text-align:left}
+table.prize th{font-size:.72rem; letter-spacing:.1em; color:var(--ink-soft); font-weight:600; text-transform:uppercase}
+table.prize td.n{text-align:right; font-family:"Barlow Condensed",sans-serif; font-variant-numeric:tabular-nums; font-weight:700; font-size:1.05rem; white-space:nowrap}
+table.prize tr.sum td{border-top:2px solid var(--line-firm); border-bottom:0; font-weight:700; padding-top:.8rem}
+.tablescroll{overflow-x:auto}
+
+/* ---------- 步驟與清單 ---------- */
+.steps{counter-reset:s; display:grid; gap:1.1rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.steps > div{position:relative; padding-top:2.4rem; border-top:2px solid var(--gold-rule)}
+.steps > div::before{
+  counter-increment:s; content:counter(s,decimal-leading-zero);
+  position:absolute; top:.7rem; left:0;
+  font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:.95rem;
+  letter-spacing:.1em; color:var(--gold);
+}
+.steps h4{font-size:1.02rem}
+.steps p{font-size:.9rem; color:var(--ink-mid); margin-top:.4rem}
+
+.checklist{display:grid; gap:.55rem; margin-top:1.2rem}
+.checklist label{
+  display:flex; gap:.7rem; align-items:flex-start; cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); border-radius:2px;
+  padding:.7rem .9rem; font-size:.92rem;
+}
+.checklist input{accent-color:var(--ok); margin-top:.35rem; flex:none}
+.checklist label:has(input:checked){background:var(--ok-wash); border-color:var(--ok)}
+.checklist label:has(input:checked) .txt{text-decoration:line-through; color:var(--ink-soft)}
+.checklist .txt b{display:block}
+.checklist .txt span{font-size:.82rem; color:var(--ink-soft)}
+.progress{display:flex; align-items:center; gap:.7rem; margin-top:1rem; font-size:.85rem; color:var(--ink-mid)}
+.bar{flex:1; height:5px; background:var(--line); border-radius:99px; overflow:hidden}
+.bar i{display:block; height:100%; width:0; background:var(--ok); transition:width .25s ease}
+
+/* ---------- 時程軌道 ---------- */
+.rail{position:relative; margin-top:.5rem; padding-left:1.9rem}
+.rail::before{content:""; position:absolute; left:.32rem; top:.5rem; bottom:.5rem; width:1px; background:var(--line-firm)}
+.stage{position:relative; padding:.7rem 0}
+.stage::before{
+  content:""; position:absolute; left:-1.9rem; top:1.15rem;
+  width:.72rem; height:.72rem; border-radius:50%;
+  background:var(--ground); border:1.5px solid var(--line-firm);
+}
+.stage.done::before{background:var(--line-firm); border-color:var(--line-firm)}
+.stage.now::before{background:var(--gold-rule); border-color:var(--gold-rule); box-shadow:0 0 0 4px var(--gold-wash)}
+.stage .d{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.02rem; letter-spacing:.02em; font-variant-numeric:tabular-nums}
+.stage .t{font-size:.94rem; margin-top:.05rem}
+.stage .n{font-size:.82rem; color:var(--ink-soft); margin-top:.1rem}
+.stage.now .d{color:var(--gold)}
+.stage.now .t{font-weight:700}
+.stage.key .t::after{content:"必到"; margin-left:.5rem; font-size:.68rem; letter-spacing:.08em; background:var(--gold-wash); color:var(--gold); padding:.1rem .4rem; border-radius:2px; vertical-align:.1em}
+
+/* ---------- FAQ ---------- */
+.faq{display:grid; gap:.5rem}
+details{background:var(--surface); border:1px solid var(--line); border-radius:2px}
+details[open]{border-color:var(--line-firm)}
+summary{
+  cursor:pointer; padding:.9rem 1.1rem; font-weight:700; font-size:.95rem;
+  list-style:none; display:flex; justify-content:space-between; gap:1rem; align-items:center;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; font-family:"Barlow Condensed",sans-serif; font-size:1.4rem; color:var(--gold); line-height:1; flex:none}
+details[open] summary::after{content:"–"}
+details .body{padding:0 1.1rem 1.1rem; font-size:.92rem; color:var(--ink-mid)}
+details .body b{color:var(--ink)}
+
+/* ---------- 聯絡與頁尾 ---------- */
+.contact{display:grid; gap:1.1rem; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.contact .card p{font-size:.9rem; color:var(--ink-mid); margin-top:.5rem}
+.fill{background:var(--gold-wash); color:var(--gold); padding:.05rem .4rem; border-radius:2px; font-size:.9em; font-weight:700}
+footer{background:var(--deep); color:var(--deep-mid); padding:2.6rem 0; font-size:.82rem}
+footer .wrap{display:grid; gap:.9rem}
+footer b{color:var(--deep-ink)}
+footer .fine{color:#8AA0B7; font-size:.76rem; line-height:1.7}
+
+.notice{
+  border-left:3px solid var(--gold-rule); background:var(--gold-wash);
+  color:var(--gold); padding:.8rem 1rem; font-size:.86rem; border-radius:0 2px 2px 0;
+}
+</style>
+</head>
+<body>
+<div id="setupNote"><div class="wrap">
+  <strong>發布前待辦</strong>
+  <span>本頁報名按鈕尚未連上表單。請在原始碼 <code>FORM_URL</code> 填入 Google 報名表單網址，並將頁尾的 Email 換成實際信箱。</span>
+</div></div>
+
+<header class="topbar"><div class="wrap">
+  <div class="brandmark"><b>元創盃</b><span>YZU STARTUP CHALLENGE 2026</span></div>
+  <nav>
+    <a href="#group">選組別</a>
+    <a href="#prize">獎項</a>
+    <a href="#how">報名方式</a>
+    <a href="#when">時程</a>
+    <a href="#faq">常見問題</a>
+    <a href="register-en.html" style="color:var(--deep-gold)">English</a>
+  </nav>
+</div></header>
+
+<div class="hero">
+  <canvas id="trails" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow">第一屆．115 學年度第 1 學期．本屆主題 AI 創新應用</p>
+    <h1>從一個想法，<br>到一支<em>國家隊</em></h1>
+    <p class="fullname">元智大學第一屆「元創盃」創新創業競賽
+      <small>名稱以核定公告為準．主辦：元智大學創新創業中心．指導：元智大學研究發展處</small>
+    </p>
+    <p class="sub">你不需要已經有公司，不需要已經有產品，甚至不需要已經有隊友。你只需要一個還沒被放棄的想法。</p>
+
+    <div class="status" id="status">
+      <span class="dot" id="statusDot"></span>
+      <span id="statusText">載入中</span>
+    </div>
+
+    <div class="facts">
+      <div><p class="k num" id="f1">20,000</p><p class="l">單隊最高獎金（元）</p></div>
+      <div><p class="k num">11<i>座</i></p><p class="l">校內獎項．入圍即有獎</p></div>
+      <div><p class="k num">3<i>至</i>6<i>人</i></p><p class="l">一隊．可跨系跨院跨年級</p></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" id="ctaTop" href="#how">前往線上報名</a>
+      <a class="btn btn-ghost" href="#group">先看我適合哪一組</a>
+      <span class="cta-note">免報名費．全程線上零紙本．手機即可完成報名</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 組別檢核器 ============ -->
+<section id="group">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">第一步</p>
+      <h2>先確認：你適合哪一組</h2>
+      <p>本競賽只設兩組。回答四題，馬上知道該報哪一組、要準備哪些文件。這個工具只在你的瀏覽器裡運作，不會送出任何資料。</p>
+    </div>
+
+    <div class="quiz" id="quiz">
+      <div class="q">
+        <p>1. 你的想法目前到哪個階段？</p>
+        <div class="opts">
+          <label><input type="radio" name="q1" value="0" checked>還只是一個想法</label>
+          <label><input type="radio" name="q1" value="1">做過一點驗證或訪談</label>
+          <label><input type="radio" name="q1" value="2">已有雛型或 Demo</label>
+          <label><input type="radio" name="q1" value="3">已在營運或已有使用者</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>2. 這個題目和你的專題、實驗室或課程專案有關嗎？</p>
+        <div class="opts">
+          <label><input type="radio" name="q2" value="0" checked>沒有關係</label>
+          <label><input type="radio" name="q2" value="2">是專題或實驗室技術的延伸</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>3. 你手上有沒有可以拿出來的佐證？例如雛型照片、Demo 連結、使用數據、訂單紀錄。</p>
+        <div class="opts">
+          <label><input type="radio" name="q3" value="0" checked>目前沒有</label>
+          <label><input type="radio" name="q3" value="2">有，至少一項</label>
+        </div>
+      </div>
+      <div class="q">
+        <p>4. 隊上有幾位是 115 學年度入學的大一新生（含一年級轉學生）？</p>
+        <div class="opts">
+          <label><input type="radio" name="q4" value="no" checked>不到一半</label>
+          <label><input type="radio" name="q4" value="yes">一半以上</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="result" id="result" aria-live="polite">
+      <p class="eyebrow">建議組別</p>
+      <h3 id="rTitle"></h3>
+      <p class="why" id="rWhy"></p>
+      <ol id="rDocs"></ol>
+      <p class="why" style="margin-top:.9rem">條件式：隊上有<b>未滿 18 歲隊員</b>時，另需由隊長上傳法定代理人簽名之單頁同意書；有<b>跨校隊員</b>時，另需由隊長彙整其在學證明上傳。兩者皆無則不需要。</p>
+      <p class="why" id="rBonus" style="margin-top:1rem"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 兩個組別 ============ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">組別</p>
+      <h2>兩組並行，各取所需</h2>
+      <p>組別一經報名截止即不得變更。資格審查若認定組別明顯不符，本中心會通知隊長於補件期限內調整。</p>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="grouptitle"><h3>創意構想組</h3><span class="tag">歡迎大一大二與境外生</span></div>
+        <ul>
+          <li>有想法、尚無具體產品或服務者</li>
+          <li>只需要一頁提案書，沒有雛型也可以報</li>
+          <li>設有大一新生保障晉級名額與新元獎</li>
+        </ul>
+        <p class="need"><b>應繳提案文件：</b>一頁提案書（PDF）</p>
+        <p class="need" style="border-top:0; padding-top:.4rem">
+          <b>獎金：</b>金元獎、銀元獎、銅元獎各 1 座，合計 25,000 元
+        </p>
+      </div>
+      <div class="card">
+        <div class="grouptitle"><h3>實戰組</h3><span class="tag">專題與實驗室技術可延伸報名</span></div>
+        <ul>
+          <li>已有雛型、已在執行，或想衝刺國家級創業計畫</li>
+          <li>畢業專題延伸、實驗室技術均可報名</li>
+          <li>需附現有成果佐證</li>
+        </ul>
+        <p class="need"><b>應繳提案文件：</b>提案書（PDF）＋現有成果說明（雛型照片、Demo 連結、使用數據、訂單紀錄，擇一以上）</p>
+        <p class="need" style="border-top:0; padding-top:.4rem">
+          <b>獎金：</b>金元獎、銀元獎、銅元獎各 1 座，合計 40,000 元
+        </p>
+      </div>
+    </div>
+
+    <div class="freshman" style="margin-top:1.6rem">
+      <h3>大一新生：第一年就可以上場</h3>
+      <p>隊員二分之一以上為 115 學年度入學之大一新生（含一年級轉學生）者，報名時勾選「新生隊伍」即可，適用保障晉級名額與新元獎。</p>
+      <div class="fpair">
+        <div><p class="k num">3<span style="font-size:.5em"> 隊</span></p><p class="l">創意構想組保障晉級名額。採外加計列，不排擠一般隊伍名額，初審總分須達 60 分</p></div>
+        <div><p class="k num">10,000<span style="font-size:.5em"> 元</span></p><p class="l">新元獎 2 座合計，限創意構想組之新生隊伍，得從缺</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 獎項 ============ -->
+<section id="prize">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">獎項</p>
+      <h2>11 座校內獎項，入圍即有獎</h2>
+      <p>獎金額度以核定經費為準，並於 2026 年 11 月 13 日（五）前公告。已公告之獎額不會調降，只會增列。各獎項均得從缺。</p>
+    </div>
+    <div class="prizewrap">
+      <div class="hero-num">
+        <p class="k num">20,000</p>
+        <p class="l">單隊最高獎金（元）</p>
+        <p class="l2">11 座獎項．總獎金 93,000 元</p>
+      </div>
+      <div class="tablescroll">
+        <table class="prize">
+          <caption>金額單位為新臺幣元，為各層獎金合計。個別獎額於獎金公告（11/13）一併公告。特別獎依贊助洽談結果，於決賽前另行公告。</caption>
+          <thead><tr><th>層級</th><th>座數與說明</th><th style="text-align:right">獎金合計</th></tr></thead>
+          <tbody>
+            <tr><td>主獎項</td><td>實戰組 3 座：金元獎、銀元獎、銅元獎各 1 座</td><td class="n">40,000</td></tr>
+            <tr><td>主獎項</td><td>創意構想組 3 座：金元獎、銀元獎、銅元獎各 1 座</td><td class="n">25,000</td></tr>
+            <tr><td>類別獎</td><td>跨組評選 3 座：<b>AI 創新應用獎</b>（本屆主題獎，最佳生成式 AI 應用）、智慧共生獎（最佳智慧科技應用）、永續共好獎（最佳社會影響）</td><td class="n">18,000</td></tr>
+            <tr><td>新元獎</td><td>2 座，限創意構想組之新生隊伍</td><td class="n">10,000</td></tr>
+            <tr class="sum"><td colspan="2">校內獎項合計 11 座</td><td class="n">93,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:2rem">
+      <h3 style="font-size:1.1rem">決賽入圍獎：全體決賽隊伍都有</h3>
+      <div class="grid3" style="margin-top:1rem">
+        <ul style="margin:0; padding-left:1.15rem; color:var(--ink-mid); font-size:.92rem">
+          <li>決賽入圍證明與公開表揚</li>
+          <li>本中心虛擬育成審查資格，通過者首年免簽約審查費</li>
+        </ul>
+        <ul style="margin:0; padding-left:1.15rem; color:var(--ink-mid); font-size:.92rem">
+          <li>業師深度輔導時數</li>
+          <li>中心具名推薦函，可用於 U-start、FITI、桃園青創基地進駐申請</li>
+        </ul>
+        <ul style="margin:0; padding-left:1.15rem; color:var(--ink-mid); font-size:.92rem">
+          <li>國際創新創業賽事選拔推薦</li>
+          <li>桃園青創基地與遠東通訊園區參訪</li>
+        </ul>
+      </div>
+      <p class="need"><b>賽後銜接：</b>決賽獲獎及具潛力隊伍，由本中心接續輔導送件國科會 FITI 創新創業激勵計畫（12 月起）與教育部 U-start 創新創業計畫（2027 年 1 至 2 月）。校內獎金是起點，外部計畫獎助才是主要出口。</p>
+    </div>
+
+    <p class="notice" style="margin-top:1.6rem">注意事項：<b>報名階段全程無紙化，但獎金核發階段需要紙本。</b>領據、隊內分配聲明、身分證明文件與帳戶資料，因本校會計與出納作業不受理電子簽章，仍須以紙本正本辦理，由得獎隊伍隊長於決賽後辦理。這只影響得獎的隊伍，與報名流程無關。</p>
+  </div>
+</section>
+
+<!-- ============ 報名方式 ============ -->
+<section id="how" class="alt">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">報名方式</p>
+      <h2>三個步驟，全程線上</h2>
+      <p>本競賽響應無紙化政策，報名全程數位化。一般隊伍<b>完全不需要列印、不需要簽名、不需要繳交任何實體文件</b>，用手機就能完成。不受理紙本、電子郵件、現場或電話報名，免報名費。</p>
+    </div>
+
+    <div class="paperless">
+      <span class="lab">響應無紙化</span>
+      <p>三件事都在線上完成，無須繳交任何證明文件：<b>在學身分</b>以校內帳號登入表單認定，不用交在學證明或學生證影本；<b>參賽同意</b>於表單內逐人勾選，系統記錄帳號與送出時間，效力等同簽署，不用簽名或掃描；<b>指導老師</b>由本中心以電子郵件向老師確認，不用附同意擔任證明。</p>
+    </div>
+
+    <div class="steps">
+      <div>
+        <h4>組隊並選定組別</h4>
+        <p>3 至 6 人，設隊長 1 人。隊長須為本校在學學生。可跨系、跨院、跨年級；得跨校組隊，惟本校學生須占全隊二分之一以上。每人以參加 1 隊為原則。</p>
+      </div>
+      <div>
+        <h4>備妥提案書並上傳</h4>
+        <p>提案書一律 PDF 上傳，實戰組另附成果佐證。同意條款在表單內逐人勾選，不需列印簽名。只有隊上有未滿 18 歲隊員或跨校隊員時，才需由隊長額外上傳一份文件。</p>
+      </div>
+      <div>
+        <h4>送出並確認收到確認信</h4>
+        <p>送出表單並收到系統確認信才算完成報名，確認信會同時副本抄送全體隊員。未收到確認信者，請在截止前來信確認。表單於 10 月 16 日 17:00 自動關閉。</p>
+      </div>
+    </div>
+
+    <div style="margin-top:2.4rem" class="measure">
+      <h3 style="font-size:1.15rem">應備文件清單</h3>
+      <p style="color:var(--ink-mid); font-size:.9rem; margin-top:.4rem">勾選狀態會存在你自己的瀏覽器裡，換裝置不會同步。</p>
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox" data-k="n1"><span class="txt"><b>線上報名表</b><span>含隊員名冊、組別選填、新生隊伍勾選欄、每位隊員同意勾選、隊長切結。線上填寫，不需列印</span></span></label>
+        <label><input type="checkbox" data-k="n2"><span class="txt"><b>提案書（PDF）</b><span>創意構想組為一頁提案書；實戰組依範本撰寫。直接上傳</span></span></label>
+        <label><input type="checkbox" data-k="n3"><span class="txt"><b>現有成果佐證</b><span>僅實戰組需要。雛型照片、Demo 連結、使用數據、訂單或營收紀錄，擇一以上。上傳檔案或填寫連結</span></span></label>
+        <label><input type="checkbox" data-k="n4"><span class="txt"><b>法定代理人同意書（條件式）</b><span>僅在隊上有未滿 18 歲隊員時需要，由隊長取得簽名後上傳。這是全程唯一需要列印簽名的一頁</span></span></label>
+        <label><input type="checkbox" data-k="n5"><span class="txt"><b>跨校隊員在學證明（條件式）</b><span>僅在隊上有他校隊員時需要，由隊長彙整為單一 PDF 上傳</span></span></label>
+        <label><input type="checkbox" data-k="n6"><span class="txt"><b>專利、獎項或合作證明（選繳）</b><span>有就附，沒有不影響資格</span></span></label>
+      </div>
+      <div class="progress"><span id="ckCount">0 / 6</span><span class="bar"><i id="ckBar"></i></span></div>
+      <p class="dropped"><b>無須繳交</b>：本校生在學證明或學生證影本、參賽同意書簽名掃描檔、指導老師同意擔任證明。<b>全隊皆為本校學生且均已成年的隊伍，不需要準備任何簽名文件，線上填完表單即完成報名。</b></p>
+    </div>
+
+    <div class="card" style="margin-top:2.4rem">
+      <h3 style="font-size:1.1rem">文件下載</h3>
+      <p style="color:var(--ink-mid); font-size:.92rem; margin-top:.5rem">競賽簡章、時程總表、報名程序說明、報名表欄位對照表與企劃書格式範本，都放在同一個雲端資料夾，<b>不需登入即可開啟</b>，跨校隊員也看得到。企劃書格式範本每一段都有撰寫引導提示，下載後直接填寫即可。</p>
+      <p style="margin-top:1rem"><a href="https://drive.google.com/drive/folders/1uWGMtvCsgON4hebxpN9OdQkOcb3RZ5D0" target="_blank" rel="noopener" style="color:var(--deep-gold); font-weight:700">開啟文件下載資料夾 &rarr;</a></p>
+      <p class="need"><b>參賽同意書暨個資授權書</b>之條款全文，於線上報名表單內以連結提供閱讀，完成法律審閱後一併置於本資料夾。報名時無須列印或簽名。</p>
+    </div>
+
+    <div class="cta-row" style="margin-top:2.4rem">
+      <a class="btn btn-primary" id="ctaMain" href="#how" style="color:#22190A">前往線上報名表單</a>
+      <span class="cta-note" style="color:var(--ink-mid)">報名期間 9/14（一）至 10/16（五）17:00．逾時表單自動關閉</span>
+    </div>
+
+    <p class="notice" style="margin-top:1.6rem">資格審查於 10/19（一）至 10/23（五）進行。文件不全者會以電子郵件通知隊長補件，<b>補件期限為 10/23（五）17:00</b>，逾期視為報名未完成。請確保隊長信箱可正常收信，並將本中心信箱加入通訊錄避免進入垃圾郵件。</p>
+  </div>
+</section>
+
+<!-- ============ 時程 ============ -->
+<section id="when">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">時程</p>
+      <h2>2026 年 9 月至 12 月</h2>
+      <p>以下日期暫定，以正式公告為準。主辦單位得視報名情形調整晉級隊數與賽程。</p>
+    </div>
+    <div class="rail measure" id="rail"></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">常見問題</p>
+      <h2>報名前最常被問到的事</h2>
+    </div>
+    <div class="faq measure">
+      <details><summary>可以一個人報名嗎？</summary><div class="body">不行。每隊至少 3 人、最多 6 人，尋找共同創作的夥伴本來就是參賽的一部分。如果還沒找到隊友，可以先來 9/16 的說明會或兩場工作坊，現場都有其他同樣在找隊友的人。</div></details>
+      <details><summary>大一新生可以報名嗎？</summary><div class="body"><b>可以，而且特別鼓勵。</b>創意構想組本來就是設計給還沒成形的想法。隊員二分之一以上為 115 學年度入學之大一新生（含一年級轉學生）者，報名時勾選「新生隊伍」，即適用保障晉級名額與新元獎。</div></details>
+      <details><summary>沒有創業經驗、沒有產品，也可以報嗎？</summary><div class="body">可以。創意構想組只需要一頁提案書，不需要雛型、不需要營收、不需要公司。評審看的是問題觀察是否真實、解法是否說得通，不是你已經做到多遠。</div></details>
+      <details><summary>一定要有指導老師嗎？</summary><div class="body">不用。指導老師 1 至 2 人為選填，沒有指導老師不影響資格也不影響評分。若有掛名，指導老師不得同時擔任本競賽評審委員。</div></details>
+      <details><summary>報了創意構想組，可以改成實戰組嗎？</summary><div class="body">報名截止後即不得變更。截止前可自行修改表單內容。若資格審查認定組別明顯不符，本中心會通知隊長在補件期限內調整。</div></details>
+      <details><summary>可以跟其他學校的同學組隊嗎？</summary><div class="body">可以。但本校學生須占全隊二分之一以上，且隊長必須是本校在學學生。跨校隊員需檢附所屬學校在學證明。獎金一律核發予具本校學生身分之隊長，隊內分配由團隊自行約定。</div></details>
+      <details><summary>畢業專題或實驗室的成果可以拿來報名嗎？</summary><div class="body">可以，這正是實戰組的主要來源。把已經做出來的東西再往前推一步：推到有商業模式、推到可以送 FITI 與 U-start。若涉及實驗室技術，建議先與指導教授確認智財歸屬。</div></details>
+      <details><summary>境外生可以參加嗎？要用中文嗎？</summary><div class="body">可以參加。<b>提案書得以中文或英文撰寫，二擇一即可，不需雙語，評分不因語言而有差別。</b>決賽簡報也可以用英語進行，請在報名表單備註欄註明。</div></details>
+      <details><summary>同一個構想，兩隊都報可以嗎？</summary><div class="body">每人以參加 1 隊為原則。同一人重複列名於 2 隊以上者，本中心會通知各隊長在補件期限內協調擇一保留；逾期未回覆者，以表單送出時間較早的隊伍為準。</div></details>
+      <details><summary>提案書要寫幾頁？</summary><div class="body">創意構想組為一頁提案書。實戰組建議 5 至 8 頁。兩組都依「企劃書格式範本」撰寫，範本內每一段都有撰寫引導提示，照著填即可。</div></details>
+      <details><summary>工作坊一定要參加嗎？</summary><div class="body">不用，兩場工作坊都是自由參加、不點名、不收費，還沒報名也可以來。9/23 教用 GenAI 做市場驗證與商業模式設計，10/7 教用 GenAI 產製提案書與簡報。決賽的簡報時間就是 5 分鐘，第二場會直接練這件事。</div></details>
+      <details><summary>要繳報名費嗎？</summary><div class="body">免報名費。</div></details>
+      <details><summary>真的完全不用交紙本嗎？</summary><div class="body"><b>是。</b>本競賽響應無紙化政策，報名全程數位化。全隊皆為本校學生且均已成年的隊伍，<b>一份需要列印或簽名的文件都沒有</b>，用手機就能報完。只有兩種情況需要由隊長額外上傳一份文件：隊上有未滿 18 歲的隊員（需法定代理人簽名的單頁同意書），或有他校隊員（需其在學證明）。</div></details>
+      <details><summary>同意書不用簽名，那怎麼算同意？</summary><div class="body">同意條款的全文會在報名表單內提供閱讀，<b>每一位隊員各有一個必勾的同意欄</b>，由隊長逐一向隊員確認後勾選，表單末另有隊長切結欄。系統會自動記錄填答帳號、電子郵件與送出時間，這份紀錄即為同意的證明。報名成功的確認信也會<b>副本抄送全體隊員</b>，你會收到通知知道自己被列名，如有異議可在補件期限前回覆撤回。</div></details>
+      <details><summary>為什麼本校生不用交在學證明了？</summary><div class="body">因為報名表單需要以<b>校內帳號登入</b>才能填寫與上傳檔案，能登入本身就證明了在學身分，再交一次學生證影本並沒有意義。這一項對全體參賽者省下的是最實際的麻煩。他校隊員沒有本校帳號，所以仍需由隊長彙整上傳在學證明。</div></details>
+      <details><summary>得獎之後也是全線上嗎？</summary><div class="body">不是。<b>報名階段全程無紙化，但獎金核發需要紙本。</b>領據、隊內分配聲明、身分證明文件與帳戶資料，因本校會計與出納作業不受理電子簽章，仍須以紙本正本辦理。這發生在 12 月決賽之後，由得獎隊伍的隊長辦理，請預留作業時間。</div></details>
+      <details><summary>得獎的獎金怎麼分？</summary><div class="body">獎金以得獎隊伍代表（隊長）具領，並造具領據。隊內如何分配由團隊自行約定並簽署分配聲明，本中心不介入、不仲裁。</div></details>
+      <details><summary>可以打電話問嗎？</summary><div class="body">本競賽採全程數位化作業，<b>洽詢一律以電子郵件或線上表單受理，不受理電話洽詢</b>。以 Email 提問通常一個工作日內會回覆，而且有紀錄可查，比較不會漏接。</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 聯絡 ============ -->
+<section>
+  <div class="wrap">
+    <div class="shead measure">
+      <p class="eyebrow">聯絡</p>
+      <h2>問問題的方式</h2>
+    </div>
+    <div class="contact">
+      <div class="card">
+        <h3 style="font-size:1.05rem">電子郵件</h3>
+        <p><span class="fill" data-fill="email">Email 待填</span></p>
+        <p>本競賽採全程數位化作業，洽詢一律以電子郵件或線上表單受理，不受理電話洽詢。來信請於主旨標明「元創盃」與隊伍名稱。</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:1.05rem">說明會</h3>
+        <p>2026 年 9 月 16 日（三）12:10 至 13:30，元智一館創新創業中心，實體與線上同步辦理（線上連結另行公告）。現場可諮詢組隊與組別選擇。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <p><b>元智大學第一屆「元創盃」創新創業競賽</b>　YZU Startup Challenge 2026</p>
+  <p>主辦：元智大學創新創業中心　指導：元智大學研究發展處</p>
+  <p class="fine">
+    競賽名稱以核定公告為準。本頁所載時程與獎額為暫定，一律以本中心正式公告為準；獎金額度以核定經費為準，於 2026 年 11 月 13 日前公告。<br>
+    協辦單位確認後另行公告。報名所蒐集之個人資料，依個人資料保護法規定處理，詳見參賽同意書暨個人資料蒐集處理利用告知暨同意書。<br>
+    本頁為報名導引頁，內容與正式簡章如有歧異，以簡章為準。
+  </p>
+</div></footer>
+
+<script>
+/* ★★★ 中心待辦：把下面兩行換成實際網址與信箱 ★★★ */
+const FORM_URL   = "https://docs.google.com/forms/d/e/1FAIpQLSf0d3UMGaI9MdZLD1JkoO_qaOIDyXeIM_8PZU00zS2wAc7VPQ/viewform";
+const CENTER_MAIL = "johnnyweb@saturn.yzu.edu.tw";
+
+/* ---------- 賽程資料（唯一事實來源：核心設定檔） ---------- */
+const STAGES = [
+  {d:"9/14（一）",   t:"報名開放",                  n:"115 學年度第 1 學期開學日", s:"2026-09-14", e:"2026-09-14"},
+  {d:"9/16（三）",   t:"開跑說明會",                n:"12:10 至 13:30．元智一館創新創業中心．實體與線上同步．自由參加", s:"2026-09-16", e:"2026-09-16"},
+  {d:"9/23（三）",   t:"賽前工作坊 1：GenAI 市場驗證與商業模式", n:"13:10 至 16:00．自由參加", s:"2026-09-23", e:"2026-09-23"},
+  {d:"10/7（三）",   t:"賽前工作坊 2：GenAI 提案書與簡報", n:"13:10 至 16:00．自由參加", s:"2026-10-07", e:"2026-10-07"},
+  {d:"10/16（五）",  t:"報名截止",                  n:"17:00 表單自動關閉，逾時不受理", s:"2026-10-16", e:"2026-10-16"},
+  {d:"10/19 至 10/23", t:"資格審查與補件",          n:"補件期限 10/23（五）17:00", s:"2026-10-19", e:"2026-10-23"},
+  {d:"10/26 至 10/30", t:"初審（線上書面審查）",    n:"不辦實體初賽", s:"2026-10-26", e:"2026-10-30"},
+  {d:"11/3（二）",   t:"晉級名單公告",              n:"兩組合計晉級 15 至 20 隊", s:"2026-11-03", e:"2026-11-03"},
+  {d:"11/11（三）",  t:"提案診所 1（一對一健檢）",   n:"晉級隊伍", s:"2026-11-11", e:"2026-11-11", key:true},
+  {d:"11/25（三）",  t:"提案診所 2",                n:"晉級隊伍", s:"2026-11-25", e:"2026-11-25", key:true},
+  {d:"12/7（一）",  t:"決賽簡報檔繳交截止",         n:"17:00", s:"2026-12-07", e:"2026-12-07"},
+  {d:"12/11（五）",   t:"決賽 Demo Day 暨頒獎典禮",   n:"13:00 至 17:30．簡報 5 分鐘＋問答 3 分鐘", s:"2026-12-11", e:"2026-12-11"}
+];
+
+const OPEN  = new Date("2026-09-14T00:00:00+08:00");
+const CLOSE = new Date("2026-10-16T17:00:00+08:00");
+const ANNOUNCE = new Date("2026-11-03T23:59:59+08:00");
+const FINAL = new Date("2026-12-11T17:30:00+08:00");
+
+/* ---------- 表單網址接線 ---------- */
+(function wireLinks(){
+  const ok = FORM_URL && FORM_URL.trim().length > 0;
+  ["ctaTop","ctaMain"].forEach(function(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(ok){ el.href = FORM_URL; el.target = "_blank"; el.rel = "noopener"; }
+    else { el.setAttribute("aria-disabled","true"); }
+  });
+  if(!ok){ document.getElementById("setupNote").classList.add("on"); }
+
+  if(CENTER_MAIL){
+    document.querySelectorAll('[data-fill="email"]').forEach(function(n){
+      n.textContent = CENTER_MAIL; n.classList.remove("fill");
+    });
+  }
+})();
+
+/* ---------- 目前階段 ---------- */
+(function status(){
+  const now = new Date();
+  const dot = document.getElementById("statusDot");
+  const txt = document.getElementById("statusText");
+  const day = 86400000;
+  let html;
+  if(now < OPEN){
+    const n = Math.ceil((OPEN - now) / day);
+    html = '報名尚未開放．距 9/14 開放還有 <b>' + n + '</b> 天';
+  } else if(now <= CLOSE){
+    const n = Math.ceil((CLOSE - now) / day);
+    dot.classList.add("live");
+    html = '報名進行中．距 10/16 17:00 截止剩 <b>' + n + '</b> 天';
+  } else if(now <= ANNOUNCE){
+    html = '報名已截止．資格審查與初審進行中';
+  } else if(now <= FINAL){
+    html = '晉級名單已公告．決賽 12/11 登場';
+  } else {
+    html = '第一屆賽程已結束．感謝所有參賽隊伍';
+  }
+  txt.innerHTML = html;
+})();
+
+/* ---------- 組別檢核器 ---------- */
+(function quiz(){
+  const quizEl = document.getElementById("quiz");
+  const res = document.getElementById("result");
+  const rTitle = document.getElementById("rTitle");
+  const rWhy = document.getElementById("rWhy");
+  const rDocs = document.getElementById("rDocs");
+  const rBonus = document.getElementById("rBonus");
+
+  function val(name){
+    const el = quizEl.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : "0";
+  }
+
+  function render(){
+    const score = Number(val("q1")) + Number(val("q2")) + Number(val("q3"));
+    const fresh = val("q4") === "yes";
+    const practical = score >= 3;
+
+    rTitle.textContent = practical ? "實戰組" : "創意構想組";
+    rWhy.textContent = practical
+      ? "你已經有具體進度或可展示的成果，適合走實戰組。實戰組的評分把「執行進度與初步成果」獨立計為 20%，你手上的東西會直接加分。"
+      : "你的想法還在成形階段，創意構想組就是為此設計的。這一組不要求雛型、不要求營收，評審看的是問題觀察是否真實、解法是否說得通。";
+
+    const docs = practical
+      ? ["<b>提案書（PDF）</b>，建議 5 至 8 頁，依企劃書格式範本撰寫，直接上傳",
+         "<b>現有成果佐證</b>：雛型照片、Demo 連結、使用數據、訂單或營收紀錄，擇一以上，上傳檔案或填寫連結",
+         "<b>同意條款於表單內逐人勾選</b>，不需列印、不需簽名、不需上傳掃描檔",
+         "本校生<b>不需要在學證明</b>，以校內帳號登入表單即為在學佐證"]
+      : ["<b>一頁提案書（PDF）</b>，依企劃書格式範本的六個區塊撰寫，直接上傳",
+         "<b>同意條款於表單內逐人勾選</b>，不需列印、不需簽名、不需上傳掃描檔",
+         "本校生<b>不需要在學證明</b>，以校內帳號登入表單即為在學佐證"];
+    rDocs.innerHTML = docs.map(function(d){ return "<li>" + d + "</li>"; }).join("");
+
+    if(fresh && !practical){
+      rBonus.innerHTML = '<span class="tag ok">符合新生隊伍</span> 記得在報名表勾選「新生隊伍」。你適用創意構想組的大一新生保障晉級名額（保障至少 3 隊，外加計列，初審總分須達 60 分），並具備新元獎資格（2 名，合計 10,000 元）。';
+    } else if(fresh && practical){
+      rBonus.innerHTML = '<span class="tag ok">符合新生隊伍</span> 記得在報名表勾選「新生隊伍」。提醒：保障晉級名額與新元獎<b>僅適用創意構想組</b>。若這兩項對你們很重要，可以評估改報創意構想組；若成果已經夠紮實，實戰組的獎金上限較高（最高 20,000 元）。';
+    } else {
+      rBonus.innerHTML = '若隊上有二分之一以上是 115 學年度入學的大一新生，別忘了在報名表勾選「新生隊伍」，可適用創意構想組的保障晉級名額與新元獎。';
+    }
+    res.hidden = false;
+  }
+
+  quizEl.addEventListener("change", render);
+  render();
+})();
+
+/* ---------- 文件清單 ---------- */
+(function checklist(){
+  const KEY = "yzc-reg-checklist";
+  const box = document.getElementById("checklist");
+  const boxes = Array.prototype.slice.call(box.querySelectorAll("input"));
+  const count = document.getElementById("ckCount");
+  const bar = document.getElementById("ckBar");
+
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e){ saved = {}; }
+
+  boxes.forEach(function(b){ if(saved[b.dataset.k]) b.checked = true; });
+
+  function sync(){
+    const n = boxes.filter(function(b){ return b.checked; }).length;
+    count.textContent = n + " / " + boxes.length;
+    bar.style.width = (n / boxes.length * 100) + "%";
+    const out = {};
+    boxes.forEach(function(b){ if(b.checked) out[b.dataset.k] = 1; });
+    try { localStorage.setItem(KEY, JSON.stringify(out)); } catch(e){}
+  }
+  box.addEventListener("change", sync);
+  sync();
+})();
+
+/* ---------- 時程軌道 ---------- */
+(function rail(){
+  const el = document.getElementById("rail");
+  const now = new Date();
+  el.innerHTML = STAGES.map(function(s){
+    const start = new Date(s.s + "T00:00:00+08:00");
+    const end = new Date(s.e + "T23:59:59+08:00");
+    let cls = "stage";
+    if(now > end) cls += " done";
+    else if(now >= start) cls += " now";
+    if(s.key) cls += " key";
+    return '<div class="' + cls + '">' +
+           '<p class="d">' + s.d + '</p>' +
+           '<p class="t">' + s.t + '</p>' +
+           '<p class="n">' + s.n + '</p></div>';
+  }).join("");
+})();
+
+/* ---------- Hero 上升光軌 ---------- */
+(function trails(){
+  const c = document.getElementById("trails");
+  if(!c) return;
+  const host = c.parentElement;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ctx = c.getContext("2d");
+  let w = 0, h = 0, lines = [], raf = 0;
+
+  function seed(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = c.clientWidth; h = c.clientHeight;
+    if(w < 2 || h < 2) return false;   /* 版面尚未成形，等 ResizeObserver 再叫一次 */
+    c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    lines = [];
+    const n = w < 640 ? 7 : 13;
+    for(let i = 0; i < n; i++){
+      lines.push({
+        x: Math.random() * w * 1.5 - w * 0.35,
+        y: -h * 0.25 + Math.random() * h * 1.5,   /* 全高分布，首幀即成立 */
+        len: 90 + Math.random() * 260,
+        v: 0.12 + Math.random() * 0.42,
+        a: 0.05 + Math.random() * 0.22,
+        gold: Math.random() < 0.45
+      });
+    }
+    return true;
+  }
+
+  function draw(){
+    if(w < 2 || h < 2) return;
+    ctx.clearRect(0, 0, w, h);
+    const k = 0.62;
+    for(const L of lines){
+      const g = ctx.createLinearGradient(L.x, L.y, L.x + L.len * k, L.y - L.len);
+      const col = L.gold ? "201,162,39" : "255,255,255";
+      g.addColorStop(0, "rgba(" + col + ",0)");
+      g.addColorStop(0.55, "rgba(" + col + "," + L.a + ")");
+      g.addColorStop(1, "rgba(" + col + ",0)");
+      ctx.strokeStyle = g;
+      ctx.lineWidth = L.gold ? 1.4 : 0.8;
+      ctx.beginPath();
+      ctx.moveTo(L.x, L.y);
+      ctx.lineTo(L.x + L.len * k, L.y - L.len);
+      ctx.stroke();
+      if(!reduce){
+        L.y -= L.v; L.x += L.v * k;
+        if(L.y + L.len < -20){ L.y = h + 40 + Math.random() * 120; L.x = Math.random() * w * 1.5 - w * 0.35; }
+      }
+    }
+    if(!reduce) raf = requestAnimationFrame(draw);
+  }
+
+  function start(){ cancelAnimationFrame(raf); if(seed()) draw(); }
+
+  /* 版面可能晚於腳本成形（字體載入、面板尺寸變動），重試至取得尺寸為止 */
+  let tries = 0;
+  function tryStart(){
+    start();
+    if((w < 2 || h < 2) && tries < 20){ tries++; setTimeout(tryStart, 150); }
+  }
+  tryStart();
+
+  if(window.ResizeObserver){
+    let t0;
+    new ResizeObserver(function(){ clearTimeout(t0); t0 = setTimeout(start, 120); }).observe(host);
+  } else {
+    let t; window.addEventListener("resize", function(){ clearTimeout(t); t = setTimeout(start, 200); });
+  }
+  window.addEventListener("load", start);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(start); }
+})();
+</script>
+
+</body>
+</html>

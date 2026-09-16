@@ -82,6 +82,42 @@ a{color:inherit; text-decoration:none}
 }
 .suggest[hidden]{display:none}
 
+/* 說明會短片橫幅 */
+.video{display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+  margin-top:1.6rem; padding:1rem 1.2rem; border:1px solid var(--gold);
+  border-radius:3px; background:rgba(201,162,39,.09);
+  transition:background .15s ease}
+.video:hover{background:rgba(201,162,39,.16)}
+.video[hidden]{display:none}
+.video .tag{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:.78rem;
+  letter-spacing:.14em; color:var(--gold); white-space:nowrap}
+.video .txt{flex:1; min-width:14rem; font-size:.88rem; color:var(--ink); line-height:1.6}
+.video .txt i{display:block; font-style:normal; font-size:.86em; color:var(--soft)}
+.video .arw{font-family:"Barlow Condensed",sans-serif; font-weight:700; color:var(--gold)}
+
+/* 賽前場次 */
+.sessions{margin-top:2.2rem; padding-top:1.4rem; border-top:1px solid var(--line)}
+.sessions .shead{display:flex; flex-wrap:wrap; gap:.8rem 1.4rem; align-items:center; justify-content:space-between}
+.sessions .shead .k{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.2rem; letter-spacing:.04em; color:var(--mid)}
+.sessions .go{background:transparent; color:var(--gold); border:1px solid var(--gold); padding:.55rem .9rem; font-size:.85rem}
+.sessions .go:hover{background:var(--gold); color:#22190A}
+/* .go 的 display:flex 優先序高過 [hidden] 的預設 display:none，須明寫 */
+.sessions .go[hidden]{display:none}
+.sessions ul{list-style:none; margin-top:1rem; display:grid; gap:.55rem}
+.sessions li{display:grid; grid-template-columns:8.5rem 1fr; gap:.2rem 1rem; align-items:baseline;
+  padding:.55rem 0; border-top:1px solid rgba(255,255,255,.08)}
+.sessions li:first-child{border-top:0}
+.sessions li b{font-family:"Barlow Condensed",sans-serif; font-weight:700; font-size:1.02rem;
+  letter-spacing:.02em; font-variant-numeric:tabular-nums; color:var(--ink)}
+.sessions li span{font-size:.82rem; color:var(--mid); line-height:1.6}
+.sessions li span i{display:block; font-style:normal; color:var(--soft); font-size:.94em}
+.sessions a.vid{display:inline-block; color:var(--gold); font-weight:700; white-space:nowrap;
+  border-bottom:1px solid var(--gold)}
+.sessions a.vid:hover{color:var(--gold-lit); border-bottom-color:var(--gold-lit)}
+.sessions a.vid[hidden]{display:none}
+.sessions .note{margin-top:.9rem; font-size:.76rem; color:var(--soft); line-height:1.65}
+@media (max-width:30rem){ .sessions li{grid-template-columns:1fr} }
+
 /* 資訊條 */
 .facts{margin-top:2.4rem; padding-top:1.4rem; border-top:1px solid var(--line);
   display:grid; gap:1rem 2rem; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))}
@@ -128,6 +164,26 @@ footer b{color:var(--mid); font-weight:500}
     </div>
   </div>
 
+  <a class="video" id="videoBand" href="#" hidden>
+    <span class="tag">說明會短片　BRIEFING VIDEO</span>
+    <span class="txt">三分鐘看懂元創盃：賽制、組別、獎項與繳件重點<i>A short video on the tracks, the prizes and what you need to submit</i></span>
+    <span class="arw">&rarr;</span>
+  </a>
+
+  <div class="sessions">
+    <div class="shead">
+      <p class="k">賽前場次　PRE-COMPETITION SESSIONS</p>
+      <a class="go" id="courseCta" href="#" hidden>報名 GenAI 工作坊　Register for the workshops <span class="arw">&rarr;</span></a>
+    </div>
+    <ul>
+      <li><b>9/16（三）12:10</b><span>開跑說明會．實體辦理．線上說明改以短片提供　<a class="vid" data-video hidden>觀看短片 &rarr;</a><i>Kick-off Briefing, held onsite. The online briefing is provided as a short video.　<a class="vid" data-video hidden>Watch the video &rarr;</a></i></span></li>
+      <li><b>9/23（三）13:10</b><span>賽前工作坊 1：GenAI 市場驗證與商業模式<i>Workshop 1: market validation and business model design with GenAI</i></span></li>
+      <li><b>10/7（三）13:10</b><span>賽前工作坊 2：GenAI 提案書與簡報<i>Workshop 2: producing your proposal and pitch with GenAI</i></span></li>
+    </ul>
+    <p class="note">三場均不收費，不強制出席，也不必先報名競賽，沒有報名也可以直接到場。9/16 說明會不需報名，看短片即可；兩場工作坊可先報名，以便本中心備妥座位與講義並寄送提醒信。<br>
+    All three sessions are free and attendance is never compulsory. You do not need to be entering the competition, and you may simply turn up. The 16 Sep briefing needs no registration, just watch the video. For the two workshops you may register so the Center can prepare seats and handouts and send you a reminder.</p>
+  </div>
+
   <div class="facts">
     <div>
       <p class="k">14 Sep &ndash; 16 Oct</p>
@@ -158,6 +214,36 @@ footer b{color:var(--mid); font-weight:500}
 </div>
 
 <script>
+/* ---------- 對外網址設定 ----------
+   COURSE_URL 為「賽前活動報名表」之填答網址，涵蓋 9/16 說明會與 9/23、10/7 兩場工作坊。
+   ★ 表單建置完成後把網址填入下行。留空時場次區塊照常顯示，只是不出現報名按鈕，
+     不會出現壞連結。三個網頁的 COURSE_URL 必須同步。                                   */
+const COURSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLScOqkxokGT7WK2H6GxczXbYgsCe7uGp72kc4576gtASN6z0xQ/viewform";
+/* 9/16 開跑說明會之線上說明短片。線上同步辦理未及設定，改以短片提供。
+   留空時短片橫幅不顯示。 */
+const VIDEO_URL = "https://reurl.cc/GgazLy";
+
+(function videoLinks(){
+  try{
+    if(!(VIDEO_URL && VIDEO_URL.trim())) return;   /* 留空則橫幅與清單連結都不出現 */
+    const band = document.getElementById("videoBand");
+    const list = document.querySelectorAll("[data-video]");
+    const all = band ? [band].concat(Array.prototype.slice.call(list)) : Array.prototype.slice.call(list);
+    all.forEach(function(el){
+      el.href = VIDEO_URL; el.target = "_blank"; el.rel = "noopener"; el.hidden = false;
+    });
+  }catch(e){}
+})();
+
+(function courseCta(){
+  try{
+    const el = document.getElementById("courseCta");
+    if(el && COURSE_URL && COURSE_URL.trim()){
+      el.href = COURSE_URL; el.target = "_blank"; el.rel = "noopener"; el.hidden = false;
+    }
+  }catch(e){}
+})();
+
 /* 依瀏覽器語言標示建議選項，不自動跳轉，選擇權仍在使用者 */
 (function suggest(){
   try{

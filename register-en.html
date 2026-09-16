@@ -296,6 +296,11 @@ table.prize tr.sum td{border-top:2px solid var(--line-firm); border-bottom:0; fo
 .stage .n{font-size:.82rem; color:var(--ink-soft); margin-top:.1rem}
 .stage.now .d{color:var(--gold)}
 .stage.now .t{font-weight:700}
+.vidlink{color:var(--gold); font-weight:700; text-underline-offset:3px}
+.stage .reg{margin-top:.3rem}
+.stage .reg a{display:inline-block; font-size:.78rem; font-weight:700; color:var(--gold);
+  border:1px solid var(--gold-rule); border-radius:2px; padding:.2rem .55rem}
+.stage .reg a:hover{background:var(--gold-wash)}
 .stage.key .t::after{content:"Attendance required"; margin-left:.5rem; font-size:.68rem; letter-spacing:.08em; background:var(--gold-wash); color:var(--gold); padding:.1rem .4rem; border-radius:2px; vertical-align:.1em}
 
 /* ---------- FAQ ---------- */
@@ -645,7 +650,8 @@ footer .fine{color:#8AA0B7; font-size:.76rem; line-height:1.7}
       </div>
       <div class="card">
         <h3 style="font-size:1.05rem">Kick-off Briefing</h3>
-        <p>16 Sep 2026 (Wed), 12:10 to 13:30, Center for Innovation and Entrepreneurship, Building 1. Held onsite with simultaneous online access (the meeting link will be announced). You can ask about teams and track choice on the spot.</p>
+        <p>16 Sep 2026 (Wed), 12:10 to 13:30, Center for Innovation and Entrepreneurship, Building 1. Held onsite. You can ask about teams and track choice on the day.</p>
+        <p style="margin-top:.5rem">The online briefing is provided as a short video. <a class="vidlink" href="https://reurl.cc/GgazLy" target="_blank" rel="noopener">Watch the briefing video</a>.</p>
       </div>
     </div>
   </div>
@@ -666,13 +672,21 @@ footer .fine{color:#8AA0B7; font-size:.76rem; line-height:1.7}
 /* TODO for the Center: replace the two values below with the real URL and address */
 const FORM_URL   = "https://docs.google.com/forms/d/e/1FAIpQLSf0d3UMGaI9MdZLD1JkoO_qaOIDyXeIM_8PZU00zS2wAc7VPQ/viewform";
 const CENTER_MAIL = "yzuiic@saturn.yzu.edu.tw";
+/* Pre-competition sessions registration form: the 16 Sep briefing plus the 23 Sep and 7 Oct
+   workshops, one form with a multi select for sessions.
+   ★ Fill in the live form URL once the form is built. Left empty, the timeline simply shows no
+     registration link, so no broken link appears. Keep index.html, register-zh.html and
+     register-en.html in step. */
+const COURSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLScOqkxokGT7WK2H6GxczXbYgsCe7uGp72kc4576gtASN6z0xQ/viewform";
+/* Short briefing video for the 16 Sep kick-off. Left empty, no video link is shown. */
+const VIDEO_URL = "https://reurl.cc/GgazLy";
 
 /* ---------- Schedule data (single source of truth: core spec file) ---------- */
 const STAGES = [
   {d:"14 Sep (Mon)", t:"Registration opens",          n:"First day of semester 1, AY 115 (2026 fall)", s:"2026-09-14", e:"2026-09-14"},
-  {d:"16 Sep (Wed)", t:"Kick-off Briefing", n:"12:10 to 13:30. Center for Innovation and Entrepreneurship, Building 1. Onsite with simultaneous online access. Open to all", s:"2026-09-16", e:"2026-09-16"},
-  {d:"23 Sep (Wed)", t:"Workshop 1: market validation and business model design with GenAI", n:"13:10 to 16:00. Open to all", s:"2026-09-23", e:"2026-09-23"},
-  {d:"7 Oct (Wed)",  t:"Workshop 2: proposal and pitch production with GenAI", n:"13:10 to 16:00. Open to all", s:"2026-10-07", e:"2026-10-07"},
+  {d:"16 Sep (Wed)", t:"Kick-off Briefing", n:"12:10 to 13:30. Center for Innovation and Entrepreneurship, Building 1. Held onsite. Open to all. The online briefing is provided as a short video", vid:true, s:"2026-09-16", e:"2026-09-16"},
+  {d:"23 Sep (Wed)", reg:true, t:"Workshop 1: market validation and business model design with GenAI", n:"13:10 to 16:00. Open to all", s:"2026-09-23", e:"2026-09-23"},
+  {d:"7 Oct (Wed)", reg:true,  t:"Workshop 2: proposal and pitch production with GenAI", n:"13:10 to 16:00. Open to all", s:"2026-10-07", e:"2026-10-07"},
   {d:"16 Oct (Fri)", t:"Registration closes",         n:"The form closes automatically at 17:00. No late entries", s:"2026-10-16", e:"2026-10-16"},
   {d:"19 – 23 Oct", t:"Eligibility check and supplementary submission", n:"Supplementary deadline 23 Oct (Fri) 17:00", s:"2026-10-19", e:"2026-10-23"},
   {d:"26 – 30 Oct", t:"Preliminary Review (online, document-based)", n:"No in-person preliminary round", s:"2026-10-26", e:"2026-10-30"},
@@ -820,10 +834,17 @@ const FINAL = new Date("2026-12-11T17:30:00+08:00");
     if(now > end) cls += " done";
     else if(now >= start) cls += " now";
     if(s.key) cls += " key";
+    var reg = "";
+    if(s.reg && COURSE_URL && COURSE_URL.trim()){
+      reg = '<p class="reg"><a href="' + COURSE_URL + '" target="_blank" rel="noopener">Register for this session &rarr;</a></p>';
+    }
+    if(s.vid && VIDEO_URL && VIDEO_URL.trim()){
+      reg += '<p class="reg"><a href="' + VIDEO_URL + '" target="_blank" rel="noopener">Watch the briefing video &rarr;</a></p>';
+    }
     return '<div class="' + cls + '">' +
            '<p class="d">' + s.d + '</p>' +
            '<p class="t">' + s.t + '</p>' +
-           '<p class="n">' + s.n + '</p></div>';
+           '<p class="n">' + s.n + '</p>' + reg + '</div>';
   }).join("");
 })();
 

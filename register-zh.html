@@ -294,6 +294,11 @@ table.prize tr.sum td{border-top:2px solid var(--line-firm); border-bottom:0; fo
 .stage .n{font-size:.82rem; color:var(--ink-soft); margin-top:.1rem}
 .stage.now .d{color:var(--gold)}
 .stage.now .t{font-weight:700}
+.vidlink{color:var(--gold); font-weight:700; text-underline-offset:3px}
+.stage .reg{margin-top:.3rem}
+.stage .reg a{display:inline-block; font-size:.78rem; font-weight:700; color:var(--gold);
+  border:1px solid var(--gold-rule); border-radius:2px; padding:.2rem .55rem}
+.stage .reg a:hover{background:var(--gold-wash)}
 .stage.key .t::after{content:"必到"; margin-left:.5rem; font-size:.68rem; letter-spacing:.08em; background:var(--gold-wash); color:var(--gold); padding:.1rem .4rem; border-radius:2px; vertical-align:.1em}
 
 /* ---------- FAQ ---------- */
@@ -640,7 +645,8 @@ footer .fine{color:#8AA0B7; font-size:.76rem; line-height:1.7}
       </div>
       <div class="card">
         <h3 style="font-size:1.05rem">說明會</h3>
-        <p>2026 年 9 月 16 日（三）12:10 至 13:30，元智一館創新創業中心，實體與線上同步辦理（線上連結另行公告）。現場可諮詢組隊與組別選擇。</p>
+        <p>2026 年 9 月 16 日（三）12:10 至 13:30，元智一館創新創業中心，實體辦理。現場可諮詢組隊與組別選擇。</p>
+        <p style="margin-top:.5rem">線上說明改以短片提供，<a class="vidlink" href="https://reurl.cc/GgazLy" target="_blank" rel="noopener">點此觀看說明會短片</a>。</p>
       </div>
     </div>
   </div>
@@ -660,13 +666,19 @@ footer .fine{color:#8AA0B7; font-size:.76rem; line-height:1.7}
 /* ★★★ 中心待辦：把下面兩行換成實際網址與信箱 ★★★ */
 const FORM_URL   = "https://docs.google.com/forms/d/e/1FAIpQLSf0d3UMGaI9MdZLD1JkoO_qaOIDyXeIM_8PZU00zS2wAc7VPQ/viewform";
 const CENTER_MAIL = "yzuiic@saturn.yzu.edu.tw";
+/* 賽前活動報名表（9/16 說明會與 9/23、10/7 兩場工作坊，同一份表單複選場次）。
+   ★ 表單建置完成後填入填答網址。留空時時程軸不出現報名連結，不會產生壞連結。
+     index.html、register-zh.html、register-en.html 三處必須同步。 */
+const COURSE_URL = "https://docs.google.com/forms/d/e/1FAIpQLScOqkxokGT7WK2H6GxczXbYgsCe7uGp72kc4576gtASN6z0xQ/viewform";
+/* 9/16 開跑說明會之線上說明短片。留空時時程軸與聯絡區塊不顯示短片連結。 */
+const VIDEO_URL = "https://reurl.cc/GgazLy";
 
 /* ---------- 賽程資料（唯一事實來源：核心設定檔） ---------- */
 const STAGES = [
   {d:"9/14（一）",   t:"報名開放",                  n:"115 學年度第 1 學期開學日", s:"2026-09-14", e:"2026-09-14"},
-  {d:"9/16（三）",   t:"開跑說明會",                n:"12:10 至 13:30．元智一館創新創業中心．實體與線上同步．自由參加", s:"2026-09-16", e:"2026-09-16"},
-  {d:"9/23（三）",   t:"賽前工作坊 1：GenAI 市場驗證與商業模式", n:"13:10 至 16:00．自由參加", s:"2026-09-23", e:"2026-09-23"},
-  {d:"10/7（三）",   t:"賽前工作坊 2：GenAI 提案書與簡報", n:"13:10 至 16:00．自由參加", s:"2026-10-07", e:"2026-10-07"},
+  {d:"9/16（三）",   t:"開跑說明會",                n:"12:10 至 13:30．元智一館創新創業中心．自由參加．線上說明改以短片提供", vid:true, s:"2026-09-16", e:"2026-09-16"},
+  {d:"9/23（三）", reg:true,   t:"賽前工作坊 1：GenAI 市場驗證與商業模式", n:"13:10 至 16:00．自由參加", s:"2026-09-23", e:"2026-09-23"},
+  {d:"10/7（三）", reg:true,   t:"賽前工作坊 2：GenAI 提案書與簡報", n:"13:10 至 16:00．自由參加", s:"2026-10-07", e:"2026-10-07"},
   {d:"10/16（五）",  t:"報名截止",                  n:"17:00 表單自動關閉，逾時不受理", s:"2026-10-16", e:"2026-10-16"},
   {d:"10/19 至 10/23", t:"資格審查與補件",          n:"補件期限 10/23（五）17:00", s:"2026-10-19", e:"2026-10-23"},
   {d:"10/26 至 10/30", t:"初審（線上書面審查）",    n:"不辦實體初賽", s:"2026-10-26", e:"2026-10-30"},
@@ -814,10 +826,17 @@ const FINAL = new Date("2026-12-11T17:30:00+08:00");
     if(now > end) cls += " done";
     else if(now >= start) cls += " now";
     if(s.key) cls += " key";
+    var reg = "";
+    if(s.reg && COURSE_URL && COURSE_URL.trim()){
+      reg = '<p class="reg"><a href="' + COURSE_URL + '" target="_blank" rel="noopener">報名這場 &rarr;</a></p>';
+    }
+    if(s.vid && VIDEO_URL && VIDEO_URL.trim()){
+      reg += '<p class="reg"><a href="' + VIDEO_URL + '" target="_blank" rel="noopener">觀看說明會短片 &rarr;</a></p>';
+    }
     return '<div class="' + cls + '">' +
            '<p class="d">' + s.d + '</p>' +
            '<p class="t">' + s.t + '</p>' +
-           '<p class="n">' + s.n + '</p></div>';
+           '<p class="n">' + s.n + '</p>' + reg + '</div>';
   }).join("");
 })();
 
